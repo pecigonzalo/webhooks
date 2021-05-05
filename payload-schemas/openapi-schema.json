@@ -6144,6 +6144,7 @@
                 "repository_selection",
                 "repositories_added",
                 "repositories_removed",
+                "requester",
                 "sender"
               ],
               "properties": {
@@ -6210,7 +6211,12 @@
                   },
                   "maxItems": 0
                 },
-                "requester": { "$ref": "#/components/schemas/user" },
+                "requester": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/user" },
+                    { "type": "null" }
+                  ]
+                },
                 "sender": { "$ref": "#/components/schemas/user" }
               },
               "additionalProperties": false,
@@ -6348,13 +6354,7 @@
                     { "$ref": "#/components/schemas/issue" },
                     {
                       "type": "object",
-                      "required": [
-                        "labels",
-                        "state",
-                        "locked",
-                        "assignee",
-                        "closed_at"
-                      ],
+                      "required": ["labels", "state", "locked", "assignee"],
                       "properties": {
                         "assignee": {
                           "oneOf": [
@@ -6367,7 +6367,6 @@
                           "enum": ["open", "closed"],
                           "description": "State of the issue; either 'open' or 'closed'"
                         },
-                        "closed_at": { "type": "null" },
                         "locked": { "type": "boolean" },
                         "labels": {
                           "type": "array",
@@ -6428,13 +6427,7 @@
                     { "$ref": "#/components/schemas/issue" },
                     {
                       "type": "object",
-                      "required": [
-                        "labels",
-                        "state",
-                        "locked",
-                        "assignee",
-                        "closed_at"
-                      ],
+                      "required": ["labels", "state", "locked", "assignee"],
                       "properties": {
                         "assignee": {
                           "oneOf": [
@@ -6447,7 +6440,6 @@
                           "enum": ["open", "closed"],
                           "description": "State of the issue; either 'open' or 'closed'"
                         },
-                        "closed_at": { "type": "null" },
                         "locked": { "type": "boolean" },
                         "labels": {
                           "type": "array",

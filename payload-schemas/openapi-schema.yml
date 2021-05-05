@@ -7317,6 +7317,7 @@ components:
               - repository_selection
               - repositories_added
               - repositories_removed
+              - requester
               - sender
             properties:
               action:
@@ -7385,7 +7386,9 @@ components:
                   additionalProperties: false
                 maxItems: 0
               requester:
-                $ref: "#/components/schemas/user"
+                oneOf:
+                  - $ref: "#/components/schemas/user"
+                  - type: "null"
               sender:
                 $ref: "#/components/schemas/user"
             additionalProperties: false
@@ -7515,7 +7518,6 @@ components:
                       - state
                       - locked
                       - assignee
-                      - closed_at
                     properties:
                       assignee:
                         oneOf:
@@ -7527,8 +7529,6 @@ components:
                           - open
                           - closed
                         description: State of the issue; either 'open' or 'closed'
-                      closed_at:
-                        type: "null"
                       locked:
                         type: boolean
                       labels:
@@ -7597,7 +7597,6 @@ components:
                       - state
                       - locked
                       - assignee
-                      - closed_at
                     properties:
                       assignee:
                         oneOf:
@@ -7609,8 +7608,6 @@ components:
                           - open
                           - closed
                         description: State of the issue; either 'open' or 'closed'
-                      closed_at:
-                        type: "null"
                       locked:
                         type: boolean
                       labels:
