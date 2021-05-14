@@ -242,6 +242,51 @@ components:
           type: array
           items:
             type: string
+            enum:
+              - check_run
+              - check_suite
+              - code_scanning_alert
+              - commit_comment
+              - content_reference
+              - create
+              - delete
+              - deployment
+              - deployment_review
+              - deployment_status
+              - deploy_key
+              - discussion
+              - discussion_comment
+              - fork
+              - gollum
+              - issues
+              - issue_comment
+              - label
+              - member
+              - membership
+              - milestone
+              - organization
+              - org_block
+              - page_build
+              - project
+              - project_card
+              - project_column
+              - public
+              - pull_request
+              - pull_request_review
+              - pull_request_review_comment
+              - push
+              - registry_package
+              - release
+              - repository
+              - repository_dispatch
+              - secret_scanning_alert
+              - star
+              - status
+              - team
+              - team_add
+              - watch
+              - workflow_dispatch
+              - workflow_run
       additionalProperties: false
       title: App
     author_association:
@@ -1144,7 +1189,9 @@ components:
               format: uri
           additionalProperties: false
         body:
-          type: string
+          type:
+            - string
+            - "null"
           description: Contents of the issue
       additionalProperties: false
       title: Issue
@@ -1230,6 +1277,7 @@ components:
           required:
             - type
             - id
+            - node_id
             - login
             - organization_billing_email
           properties:
@@ -1237,6 +1285,8 @@ components:
               type: string
             id:
               type: integer
+            node_id:
+              type: string
             login:
               type: string
             organization_billing_email:
@@ -3052,6 +3102,65 @@ components:
           type: boolean
       additionalProperties: false
       title: User
+    webhook-events:
+      oneOf:
+        - type: array
+          items:
+            type: string
+            enum:
+              - check_run
+              - check_suite
+              - code_scanning_alert
+              - commit_comment
+              - content_reference
+              - create
+              - delete
+              - deployment
+              - deployment_review
+              - deployment_status
+              - deploy_key
+              - discussion
+              - discussion_comment
+              - fork
+              - gollum
+              - issues
+              - issue_comment
+              - label
+              - member
+              - membership
+              - meta
+              - milestone
+              - organization
+              - org_block
+              - page_build
+              - project
+              - project_card
+              - project_column
+              - public
+              - pull_request
+              - pull_request_review
+              - pull_request_review_comment
+              - push
+              - registry_package
+              - release
+              - repository
+              - repository_dispatch
+              - repository_import
+              - repository_vulnerability_alert
+              - secret_scanning_alert
+              - star
+              - status
+              - team
+              - team_add
+              - watch
+              - workflow_dispatch
+              - workflow_run
+        - type: array
+          items:
+            type: string
+            const: "*"
+          maxItems: 1
+      title: Webhook Events
     workflow-run:
       required:
         - artifacts_url
@@ -3100,6 +3209,15 @@ components:
           type:
             - string
             - "null"
+          enum:
+            - success
+            - failure
+            - neutral
+            - cancelled
+            - timed_out
+            - action_required
+            - stale
+            - null
         created_at:
           type: string
           format: date-time
@@ -3141,6 +3259,11 @@ components:
           type: integer
         status:
           type: string
+          enum:
+            - requested
+            - in_progress
+            - completed
+            - queued
         updated_at:
           type: string
           format: date-time
@@ -3383,6 +3506,8 @@ components:
                         type: array
                         items:
                           $ref: "#/components/schemas/check-run-pull-request"
+                      deployment:
+                        $ref: "#/components/schemas/check-run-deployment"
                       app:
                         $ref: "#/components/schemas/app"
                       created_at:
@@ -3398,8 +3523,6 @@ components:
                     type: array
                     items:
                       $ref: "#/components/schemas/check-run-pull-request"
-                  deployment:
-                    $ref: "#/components/schemas/check-run-deployment"
                 additionalProperties: false
               requested_action:
                 type:
@@ -3614,6 +3737,8 @@ components:
                           `null` and the `pull_requests` array will be empty.
                         items:
                           $ref: "#/components/schemas/check-run-pull-request"
+                      deployment:
+                        $ref: "#/components/schemas/check-run-deployment"
                       app:
                         $ref: "#/components/schemas/app"
                       created_at:
@@ -3629,8 +3754,6 @@ components:
                     type: array
                     items:
                       $ref: "#/components/schemas/check-run-pull-request"
-                  deployment:
-                    $ref: "#/components/schemas/check-run-deployment"
                 additionalProperties: false
               requested_action:
                 type:
@@ -3846,6 +3969,8 @@ components:
                           `null` and the `pull_requests` array will be empty.
                         items:
                           $ref: "#/components/schemas/check-run-pull-request"
+                      deployment:
+                        $ref: "#/components/schemas/check-run-deployment"
                       app:
                         $ref: "#/components/schemas/app"
                       created_at:
@@ -3861,8 +3986,6 @@ components:
                     type: array
                     items:
                       $ref: "#/components/schemas/check-run-pull-request"
-                  deployment:
-                    $ref: "#/components/schemas/check-run-deployment"
                 additionalProperties: false
               requested_action:
                 type: object
@@ -4064,6 +4187,8 @@ components:
                         type: array
                         items:
                           $ref: "#/components/schemas/check-run-pull-request"
+                      deployment:
+                        $ref: "#/components/schemas/check-run-deployment"
                       app:
                         $ref: "#/components/schemas/app"
                       created_at:
@@ -4079,8 +4204,6 @@ components:
                     type: array
                     items:
                       $ref: "#/components/schemas/check-run-pull-request"
-                  deployment:
-                    $ref: "#/components/schemas/check-run-deployment"
                 additionalProperties: false
               requested_action:
                 type:
@@ -7404,6 +7527,7 @@ components:
               - repository_selection
               - repositories_added
               - repositories_removed
+              - requester
               - sender
             properties:
               action:
@@ -7477,6 +7601,10 @@ components:
                       type: boolean
                       description: Whether the repository is private or public.
                   additionalProperties: false
+              requester:
+                oneOf:
+                  - $ref: "#/components/schemas/user"
+                  - type: "null"
               sender:
                 $ref: "#/components/schemas/user"
             additionalProperties: false
@@ -9216,9 +9344,7 @@ components:
                   active:
                     type: boolean
                   events:
-                    type: array
-                    items:
-                      type: string
+                    $ref: "#/components/schemas/webhook-events"
                   config:
                     type: object
                     required:
@@ -9228,6 +9354,9 @@ components:
                     properties:
                       content_type:
                         type: string
+                        enum:
+                          - json
+                          - form
                       insecure_ssl:
                         type: string
                       url:
@@ -10194,6 +10323,7 @@ components:
                 type: string
               hook_id:
                 type: integer
+                description: The ID of the webhook that triggered the ping.
               hook:
                 type: object
                 description: The [webhook
@@ -10218,10 +10348,16 @@ components:
                     type: string
                   active:
                     type: boolean
+                  app_id:
+                    type: integer
+                    description:
+                      When you register a new GitHub App, GitHub sends a ping event to
+                      the **webhook URL** you specified during registration. The
+                      event contains the `app_id`, which is required for
+                      [authenticating](https://docs.github.com/en/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps)
+                      an app.
                   events:
-                    type: array
-                    items:
-                      type: string
+                    $ref: "#/components/schemas/webhook-events"
                   config:
                     type: object
                     required:
@@ -10231,6 +10367,9 @@ components:
                     properties:
                       content_type:
                         type: string
+                        enum:
+                          - json
+                          - form
                       secret:
                         type: string
                       url:
@@ -14623,6 +14762,141 @@ components:
                 additionalProperties: false
             additionalProperties: false
             title: security_advisory updated event
+    security_advisory$withdrawn:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - action
+              - security_advisory
+            properties:
+              action:
+                type: string
+                enum:
+                  - withdrawn
+              security_advisory:
+                type: object
+                description:
+                  The details of the security advisory, including summary,
+                  description, and severity.
+                required:
+                  - cvss
+                  - cwes
+                  - ghsa_id
+                  - summary
+                  - description
+                  - severity
+                  - identifiers
+                  - references
+                  - published_at
+                  - updated_at
+                  - withdrawn_at
+                  - vulnerabilities
+                properties:
+                  cvss:
+                    type: object
+                    required:
+                      - vector_string
+                      - score
+                    properties:
+                      vector_string:
+                        type:
+                          - string
+                          - "null"
+                      score:
+                        type: number
+                    additionalProperties: false
+                  cwes:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - cwe_id
+                        - name
+                      properties:
+                        cwe_id:
+                          type: string
+                        name:
+                          type: string
+                      additionalProperties: false
+                  ghsa_id:
+                    type: string
+                  summary:
+                    type: string
+                  description:
+                    type: string
+                  severity:
+                    type: string
+                  identifiers:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - value
+                        - type
+                      properties:
+                        value:
+                          type: string
+                        type:
+                          type: string
+                      additionalProperties: false
+                  references:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - url
+                      properties:
+                        url:
+                          type: string
+                          format: uri
+                      additionalProperties: false
+                  published_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  withdrawn_at:
+                    type: string
+                  vulnerabilities:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - package
+                        - severity
+                        - vulnerable_version_range
+                        - first_patched_version
+                      properties:
+                        package:
+                          type: object
+                          required:
+                            - ecosystem
+                            - name
+                          properties:
+                            ecosystem:
+                              type: string
+                            name:
+                              type: string
+                          additionalProperties: false
+                        severity:
+                          type: string
+                        vulnerable_version_range:
+                          type: string
+                        first_patched_version:
+                          type:
+                            - object
+                            - "null"
+                          required:
+                            - identifier
+                          properties:
+                            identifier:
+                              type: string
+                          additionalProperties: false
+                      additionalProperties: false
+                additionalProperties: false
+            additionalProperties: false
+            title: security_advisory withdrawn event
     security_advisory_event:
       content:
         application/json:
@@ -14631,6 +14905,7 @@ components:
               - $ref: "#/components/requestBodies/security_advisory$performed"
               - $ref: "#/components/requestBodies/security_advisory$published"
               - $ref: "#/components/requestBodies/security_advisory$updated"
+              - $ref: "#/components/requestBodies/security_advisory$withdrawn"
             discriminator:
               propertyName: action
     sponsorship$cancelled:
@@ -15581,6 +15856,14 @@ components:
                     properties:
                       conclusion:
                         type: string
+                        enum:
+                          - success
+                          - failure
+                          - neutral
+                          - cancelled
+                          - timed_out
+                          - action_required
+                          - stale
                     tsAdditionalProperties: false
               installation:
                 $ref: "#/components/schemas/installation-lite"
@@ -15611,15 +15894,7 @@ components:
               workflow:
                 $ref: "#/components/schemas/workflow"
               workflow_run:
-                allOf:
-                  - $ref: "#/components/schemas/workflow-run"
-                  - type: object
-                    required:
-                      - conclusion
-                    properties:
-                      conclusion:
-                        type: "null"
-                    tsAdditionalProperties: false
+                $ref: "#/components/schemas/workflow-run"
               installation:
                 $ref: "#/components/schemas/installation-lite"
             additionalProperties: false
