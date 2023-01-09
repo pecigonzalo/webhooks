@@ -342,6 +342,11 @@
       "default": true
     },
     "has_pages": { "type": "boolean" },
+    "has_discussions": {
+      "type": "boolean",
+      "description": "Whether discussions are enabled.",
+      "default": true
+    },
     "forks_count": { "type": "integer" },
     "mirror_url": { "type": ["string", "null"], "format": "uri" },
     "archived": {
@@ -391,6 +396,10 @@
     },
     "allow_update_branch": { "type": "boolean" },
     "use_squash_pr_title_as_default": { "type": "boolean" },
+    "squash_merge_commit_message": { "type": "string" },
+    "squash_merge_commit_title": { "type": "string" },
+    "merge_commit_message": { "type": "string" },
+    "merge_commit_title": { "type": "string" },
     "is_template": { "type": "boolean" },
     "web_commit_signoff_required": { "type": "boolean" },
     "topics": { "type": "array", "items": { "type": "string" } },

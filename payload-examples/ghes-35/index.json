@@ -1725,7 +1725,7 @@
       },
       "check_suite[status]": {
         "type": "string",
-        "description": "The summary status for all check runs that are part of the check suite. Can be `requested`, `in_progress`, or `completed`."
+        "description": "The summary status for all check runs that are part of the check suite. Can be `queued`, `requested`, `in_progress`, or `completed`."
       },
       "check_suite[conclusion]": {
         "type": "string",
@@ -13940,7 +13940,7 @@
   },
   {
     "name": "project_card",
-    "description": "Activity related to project cards. The type of activity is specified in the `action` property of the payload object. For more information, see the \"[project cards](https://docs.github.com/en/enterprise-server@3.5/rest/reference/projects#cards)\" REST API.",
+    "description": "Activity related to cards in a project board. The type of activity is specified in the `action` property of the payload object. For more information, see the \"[project cards](https://docs.github.com/en/enterprise-server@3.5/rest/reference/projects#cards)\" REST API.",
     "actions": ["converted", "created", "deleted", "edited", "moved"],
     "properties": {
       "changes": {
@@ -20988,15 +20988,15 @@
       },
       "commits[][added]": {
         "type": "array",
-        "description": "An array of files added in the commit."
+        "description": "An array of files added in the commit. For extremely large commits where GitHub Enterprise Server is unable to calculate this list in a timely manner, this may be empty even if files were added."
       },
       "commits[][modified]": {
         "type": "array",
-        "description": "An array of files modified by the commit."
+        "description": "An array of files modified by the commit. For extremely large commits where GitHub Enterprise Server is unable to calculate this list in a timely manner, this may be empty even if files were modified."
       },
       "commits[][removed]": {
         "type": "array",
-        "description": "An array of files removed in the commit."
+        "description": "An array of files removed in the commit. For extremely large commits where GitHub Enterprise Server is unable to calculate this list in a timely manner, this may be empty even if files were removed."
       },
       "pusher": {
         "type": "object",
@@ -25308,7 +25308,7 @@
     "properties": {
       "inputs": {
         "type": "object",
-        "description": "Inputs to the workflow. Each key represents the name of the input while it's value represents the value of that input."
+        "description": "Inputs to the workflow. Each key represents the name of the input while its value represents the value of that input."
       },
       "organization": {
         "type": "object",
@@ -25316,7 +25316,7 @@
       },
       "ref": {
         "type": "string",
-        "description": "The branch ref from which the workflow was run."
+        "description": "The branch or tag from which the workflow was run."
       },
       "repository": {
         "type": "object",

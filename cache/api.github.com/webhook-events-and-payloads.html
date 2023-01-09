@@ -2,547 +2,535 @@
   <div><h1>Webhook events and payloads</h1></div>
 </div>
 <div>
-  <h2 id="in-this-article">
-    <a
-      rel=""
-      href="/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#in-this-article"
-      >In this article</a
-    >
-  </h2>
-  <div>
-    <div>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div>
-                <a href="#webhook-payload-object-common-properties"
-                  >Webhook payload object common properties</a
-                >
-              </div>
-            </div>
-          </div>
+  <h2 id="in-this-article">In this article</h2>
+  <nav>
+    <ul>
+      <div>
+        <li aria-labelledby="react-aria-351 ">
+          <a href="#webhook-payload-object-common-properties"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-351"
+                >Webhook payload object common properties</span
+              >
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div>
-                <a href="#branch_protection_rule">branch_protection_rule</a>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-354 ">
+          <a href="#branch_protection_rule"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-354">branch_protection_rule</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#check_run">check_run</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-357 ">
+          <a href="#check_run"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-357">check_run</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#check_suite">check_suite</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-360 ">
+          <a href="#check_suite"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-360">check_suite</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#code_scanning_alert">code_scanning_alert</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-363 ">
+          <a href="#code_scanning_alert"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-363">code_scanning_alert</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#commit_comment">commit_comment</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-366 ">
+          <a href="#commit_comment"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-366">commit_comment</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#create">create</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-369 ">
+          <a href="#create"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-369">create</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#delete">delete</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-372 ">
+          <a href="#delete"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-372">delete</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#deploy_key">deploy_key</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-375 ">
+          <a href="#dependabot_alert"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-375">dependabot_alert</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#deployment">deployment</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-378 ">
+          <a href="#deploy_key"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-378">deploy_key</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#deployment_status">deployment_status</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-381 ">
+          <a href="#deployment"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-381">deployment</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#discussion">discussion</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-384 ">
+          <a href="#deployment_status"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-384">deployment_status</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#discussion_comment">discussion_comment</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-387 ">
+          <a href="#discussion"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-387">discussion</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#fork">fork</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-390 ">
+          <a href="#discussion_comment"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-390">discussion_comment</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div>
-                <a href="#github_app_authorization">github_app_authorization</a>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-393 ">
+          <a href="#fork"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-393">fork</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#gollum">gollum</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-396 ">
+          <a href="#github_app_authorization"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-396">github_app_authorization</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#installation">installation</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-399 ">
+          <a href="#gollum"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-399">gollum</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div>
-                <a href="#installation_repositories"
-                  >installation_repositories</a
-                >
-              </div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-402 ">
+          <a href="#installation"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-402">installation</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#issue_comment">issue_comment</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-405 ">
+          <a href="#installation_repositories"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-405">installation_repositories</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#issues">issues</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-408 ">
+          <a href="#issue_comment"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-408">issue_comment</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#label">label</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-411 ">
+          <a href="#issues"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-411">issues</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div>
-                <a href="#marketplace_purchase">marketplace_purchase</a>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-414 ">
+          <a href="#label"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-414">label</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#member">member</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-417 ">
+          <a href="#marketplace_purchase"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-417">marketplace_purchase</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#membership">membership</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-420 ">
+          <a href="#member"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-420">member</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#meta">meta</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-423 ">
+          <a href="#membership"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-423">membership</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#milestone">milestone</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-426 ">
+          <a href="#merge_group"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-426">merge_group</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#organization">organization</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-429 ">
+          <a href="#meta"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-429">meta</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#org_block">org_block</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-432 ">
+          <a href="#milestone"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-432">milestone</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#package">package</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-435 ">
+          <a href="#organization"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-435">organization</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#page_build">page_build</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-438 ">
+          <a href="#org_block"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-438">org_block</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#ping">ping</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-441 ">
+          <a href="#package"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-441">package</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#project">project</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-444 ">
+          <a href="#page_build"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-444">page_build</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#project_card">project_card</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-447 ">
+          <a href="#ping"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-447">ping</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#project_column">project_column</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-450 ">
+          <a href="#project"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-450">project</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#projects_v2_item">projects_v2_item</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-453 ">
+          <a href="#project_card"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-453">project_card</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#public">public</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-456 ">
+          <a href="#project_column"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-456">project_column</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#pull_request">pull_request</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-459 ">
+          <a href="#projects_v2_item"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-459">projects_v2_item</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#pull_request_review">pull_request_review</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-462 ">
+          <a href="#public"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-462">public</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div>
-                <a href="#pull_request_review_comment"
-                  >pull_request_review_comment</a
-                >
-              </div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-465 ">
+          <a href="#pull_request"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-465">pull_request</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div>
-                <a href="#pull_request_review_thread"
-                  >pull_request_review_thread</a
-                >
-              </div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-468 ">
+          <a href="#pull_request_review"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-468">pull_request_review</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#push">push</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-471 ">
+          <a href="#pull_request_review_comment"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-471">pull_request_review_comment</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#release">release</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-474 ">
+          <a href="#pull_request_review_thread"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-474">pull_request_review_thread</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#repository_dispatch">repository_dispatch</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-477 ">
+          <a href="#push"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-477">push</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#repository">repository</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-480 ">
+          <a href="#release"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-480">release</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#repository_import">repository_import</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-483 ">
+          <a href="#repository_dispatch"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-483">repository_dispatch</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div>
-                <a href="#repository_vulnerability_alert"
-                  >repository_vulnerability_alert</a
-                >
-              </div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-486 ">
+          <a href="#repository"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-486">repository</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#security_advisory">security_advisory</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-489 ">
+          <a href="#repository_import"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-489">repository_import</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#sponsorship">sponsorship</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-492 ">
+          <a href="#repository_vulnerability_alert"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-492">repository_vulnerability_alert</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#star">star</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-495 ">
+          <a href="#security_advisory"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-495">security_advisory</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#status">status</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-498 ">
+          <a href="#sponsorship"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-498">sponsorship</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#team">team</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-501 ">
+          <a href="#star"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-501">star</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#team_add">team_add</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-504 ">
+          <a href="#status"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-504">status</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#watch">watch</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-507 ">
+          <a href="#team"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-507">team</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#workflow_dispatch">workflow_dispatch</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-510 ">
+          <a href="#team_add"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-510">team_add</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#workflow_job">workflow_job</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-513 ">
+          <a href="#watch"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-513">watch</span>
+            </div></a
+          >
         </li>
-      </ul>
-      <ul>
-        <li tabindex="-1">
-          <div>
-            <div style="--main-content-flex-direction: row">
-              <div><a href="#workflow_run">workflow_run</a></div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-516 ">
+          <a href="#workflow_dispatch"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-516">workflow_dispatch</span>
+            </div></a
+          >
         </li>
-      </ul>
-    </div>
-  </div>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-519 ">
+          <a href="#workflow_job"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-519">workflow_job</span>
+            </div></a
+          >
+        </li>
+      </div>
+      <div>
+        <li aria-labelledby="react-aria-522 ">
+          <a href="#workflow_run"
+            ><div data-component="ActionList.Item--DividerContainer">
+              <span id="react-aria-522">workflow_run</span>
+            </div></a
+          >
+        </li>
+      </div>
+    </ul>
+  </nav>
 </div>
 <div>
   <div data-testid="lead" data-search="lead">
@@ -871,8 +859,7 @@
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
         <li>
-          GitHub Apps with at least <code>read-only</code> access on
-          repositories administration
+          GitHub Apps with <strong>Administration</strong> repository permission
         </li>
       </ul>
       <h3 id="webhook-payload-object">
@@ -1231,17 +1218,16 @@
           repositories
         </li>
         <li>
-          GitHub Apps with the <code>checks:read</code> permission receive
+          GitHub Apps with <strong>Checks</strong> read permission receive
           payloads for the <code>created</code> and
           <code>completed</code> events that occur in the repository where the
-          app is installed. The app must have the
-          <code>checks:write</code> permission to receive the
-          <code>rerequested</code> and <code>requested_action</code> event
-          types. The <code>rerequested</code> and
-          <code>requested_action</code> event type payloads are only sent to the
-          GitHub App being requested. GitHub Apps with the
-          <code>checks:write</code> are automatically subscribed to this webhook
-          event.
+          app is installed. The app must have <strong>Checks</strong> write
+          permission to receive the <code>rerequested</code> and
+          <code>requested_action</code> event types. The
+          <code>rerequested</code> and <code>requested_action</code> event type
+          payloads are only sent to the GitHub App being requested. GitHub Apps
+          with <strong>Checks</strong> write permission are automatically
+          subscribed to this webhook event.
         </li>
       </ul>
       <h3 id="webhook-payload-object-1">
@@ -1841,16 +1827,16 @@
           <code>completed</code> event types in repositories
         </li>
         <li>
-          GitHub Apps with the <code>checks:read</code> permission receive
+          GitHub Apps with <strong>Checks</strong> read permission receive
           payloads for the <code>created</code> and
           <code>completed</code> events that occur in the repository where the
-          app is installed. The app must have the
-          <code>checks:write</code> permission to receive the
-          <code>requested</code> and <code>rerequested</code> event types. The
-          <code>requested</code> and <code>rerequested</code> event type
-          payloads are only sent to the GitHub App being requested. GitHub Apps
-          with the <code>checks:write</code> are automatically subscribed to
-          this webhook event.
+          app is installed. The app must have <strong>Checks</strong> write
+          permission to receive the <code>requested</code> and
+          <code>rerequested</code> event types. The <code>requested</code> and
+          <code>rerequested</code> event type payloads are only sent to the
+          GitHub App being requested. GitHub Apps with
+          <strong>Checks</strong> write permission are automatically subscribed
+          to this webhook event.
         </li>
       </ul>
       <h3 id="webhook-payload-object-2">
@@ -1938,8 +1924,8 @@
             <td><code>string</code></td>
             <td>
               The summary status for all check runs that are part of the check
-              suite. Can be <code>requested</code>, <code>in_progress</code>, or
-              <code>completed</code>.
+              suite. Can be <code>queued</code>, <code>requested</code>,
+              <code>in_progress</code>, or <code>completed</code>.
             </td>
           </tr>
           <tr>
@@ -2322,7 +2308,7 @@
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
         <li>
-          GitHub Apps with the <code>security_events :read</code> permission
+          GitHub Apps with <strong>Code scanning alerts</strong> permission
         </li>
       </ul>
       <h3 id="webhook-payload-object-3">
@@ -2680,7 +2666,7 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>contents</code> permission</li>
+        <li>GitHub Apps with <strong>Contents</strong> permission</li>
       </ul>
       <h3 id="webhook-payload-object-4">
         <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-4"
@@ -3001,7 +2987,7 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>contents</code> permission</li>
+        <li>GitHub Apps with <strong>Contents</strong> permission</li>
       </ul>
       <h3 id="webhook-payload-object-5">
         <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-5"
@@ -3316,7 +3302,7 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>contents</code> permission</li>
+        <li>GitHub Apps with <strong>Contents</strong> permission</li>
       </ul>
       <h3 id="webhook-payload-object-6">
         <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-6"
@@ -3559,6 +3545,418 @@
 }
 </code></pre>
       </div>
+      <h2 id="dependabot_alert">
+        <a aria-hidden="" tabindex="-1" href="#dependabot_alert"
+          ><svg
+            aria-hidden=""
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            fill="currentColor"
+            style="
+              display: inline-block;
+              user-select: none;
+              vertical-align: middle;
+            "
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+            ></path></svg></a
+        >dependabot_alert
+      </h2>
+      <div>
+        <p>
+          <strong>Note:</strong> Webhook events for Dependabot alerts are
+          currently in beta and subject to change.
+        </p>
+      </div>
+      <p>
+        Activity related to Dependabot alerts. The type of activity is specified
+        in the <code>action</code> property of the payload object. For more
+        information, see "<a
+          href="/en/code-security/dependabot/dependabot-alerts/about-dependabot-alerts"
+          >About Dependabot alerts</a
+        >."
+      </p>
+      <h3 id="availability-7">
+        <a aria-hidden="" tabindex="-1" href="#availability-7"
+          ><svg
+            aria-hidden=""
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            fill="currentColor"
+            style="
+              display: inline-block;
+              user-select: none;
+              vertical-align: middle;
+            "
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+            ></path></svg></a
+        >Availability
+      </h3>
+      <ul>
+        <li>Repository webhooks</li>
+        <li>Organization webhooks</li>
+        <li>GitHub Apps with <strong>Dependabot alerts</strong> permission</li>
+      </ul>
+      <h3 id="webhook-payload-object-7">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-7"
+          ><svg
+            aria-hidden=""
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            fill="currentColor"
+            style="
+              display: inline-block;
+              user-select: none;
+              vertical-align: middle;
+            "
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+            ></path></svg></a
+        >Webhook payload object
+      </h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>action</code></td>
+            <td><code>string</code></td>
+            <td>
+              The action that was performed. Can be one of <code>created</code>,
+              <code>dismissed</code>, <code>reopened</code>, <code>fixed</code>,
+              or <code>reintroduced</code>.
+            </td>
+          </tr>
+          <tr>
+            <td><code>alert</code></td>
+            <td><code>object</code></td>
+            <td>
+              The Dependabot
+              <a href="/en/rest/dependabot/alerts#get-a-dependabot-alert"
+                ><code>alert</code></a
+              >
+              involved in the event.
+            </td>
+          </tr>
+          <tr>
+            <td><code>repository</code></td>
+            <td><code>object</code></td>
+            <td>
+              The
+              <a href="/en/rest/reference/repos#get-a-repository"
+                ><code>repository</code></a
+              >
+              where the event occurred.
+            </td>
+          </tr>
+          <tr>
+            <td><code>organization</code></td>
+            <td><code>object</code></td>
+            <td>
+              Webhook payloads contain the
+              <a href="/en/rest/reference/orgs#get-an-organization"
+                ><code>organization</code></a
+              >
+              object when the webhook is configured for an organization or the
+              event occurs from activity in a repository owned by an
+              organization.
+            </td>
+          </tr>
+          <tr>
+            <td><code>installation</code></td>
+            <td><code>object</code></td>
+            <td>
+              The GitHub App installation. Webhook payloads contain the
+              <code>installation</code> property when the event is configured
+              for and sent to a GitHub App.
+            </td>
+          </tr>
+          <tr>
+            <td><code>sender</code></td>
+            <td><code>object</code></td>
+            <td>
+              If the <code>action</code> is <code>dismissed</code> or
+              <code>reopened</code>, the <code>sender</code> is the
+              <a href="/en/rest/users/users#get-a-user"><code>user</code></a>
+              that triggered the event. The <code>sender</code> is
+              <code>github</code> for all other actions.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id="webhook-payload-example-7">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-7"
+          ><svg
+            aria-hidden=""
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            fill="currentColor"
+            style="
+              display: inline-block;
+              user-select: none;
+              vertical-align: middle;
+            "
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+            ></path></svg></a
+        >Webhook payload example
+      </h3>
+      <div data-highlight="json">
+        <pre><code>{
+  "action": "fixed",
+  "alert": {
+    "number": 1,
+    "state": "fixed",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "ansible"
+      },
+      "manifest_path": "path/to/requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-8f4m-hccc-8qph",
+      "cve_id": "CVE-2021-20191",
+      "summary": "Insertion of Sensitive Information into Log File in ansible",
+      "description": "A flaw was found in ansible. Credentials, such as secrets, are being disclosed in console log by default and not protected by no_log feature when using those modules. An attacker can take advantage of this information to steal those credentials. The highest threat from this vulnerability is to data confidentiality.",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "ansible"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": "&gt;= 2.9.0, &lt; 2.9.18",
+          "first_patched_version": {
+            "identifier": "2.9.18"
+          }
+        },
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "ansible"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": "&lt; 2.8.19",
+          "first_patched_version": {
+            "identifier": "2.8.19"
+          }
+        },
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "ansible"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": "&gt;= 2.10.0, &lt; 2.10.7",
+          "first_patched_version": {
+            "identifier": "2.10.7"
+          }
+        }
+      ],
+      "severity": "medium",
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+        "score": 5.5
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-532",
+          "name": "Insertion of Sensitive Information into Log File"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "GHSA",
+          "value": "GHSA-8f4m-hccc-8qph"
+        },
+        {
+          "type": "CVE",
+          "value": "CVE-2021-20191"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-20191"
+        },
+        {
+          "url": "https://access.redhat.com/security/cve/cve-2021-20191"
+        },
+        {
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1916813"
+        }
+      ],
+      "published_at": "2021-06-01T17:38:00Z",
+      "updated_at": "2021-08-12T23:06:00Z",
+      "withdrawn_at": null
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "ansible"
+      },
+      "severity": "medium",
+      "vulnerable_version_range": "&lt; 2.8.19",
+      "first_patched_version": {
+        "identifier": "2.8.19"
+      }
+    },
+    "url": "https://api.github.com/repos/octocat/hello-world/dependabot/alerts/1",
+    "html_url": "https://github.com/octocat/hello-world/security/dependabot/1",
+    "created_at": "2022-06-14T15:21:52Z",
+    "updated_at": "2022-06-15T13:55:40Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": "2022-06-15T13:55:40Z"
+  },
+  "repository": {
+    "id": 1296269,
+    "node_id": "MDEwOlJlcG9zaXRvcnkxMjk2MjY5",
+    "name": "hello-world",
+    "full_name": "octocat/hello-world",
+    "private": false,
+    "owner": {
+      "login": "octocat",
+      "id": 1,
+      "node_id": "MDQ6VXNlcjE=",
+      "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/octocat",
+      "html_url": "https://github.com/octocat",
+      "followers_url": "https://api.github.com/users/octocat/followers",
+      "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+      "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+      "organizations_url": "https://api.github.com/users/octocat/orgs",
+      "repos_url": "https://api.github.com/users/octocat/repos",
+      "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/octocat/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "html_url": "https://github.com/octocat/hello-world",
+    "description": null,
+    "fork": false,
+    "url": "https://api.github.com/repos/octocat/hello-world",
+    "archive_url": "https://api.github.com/repos/octocat/hello-world/{archive_format}{/ref}",
+    "assignees_url": "https://api.github.com/repos/octocat/hello-world/assignees{/user}",
+    "blobs_url": "https://api.github.com/repos/octocat/hello-world/git/blobs{/sha}",
+    "branches_url": "https://api.github.com/repos/octocat/hello-world/branches{/branch}",
+    "collaborators_url": "https://api.github.com/repos/octocat/hello-world/collaborators{/collaborator}",
+    "comments_url": "https://api.github.com/repos/octocat/hello-world/comments{/number}",
+    "commits_url": "https://api.github.com/repos/octocat/hello-world/commits{/sha}",
+    "compare_url": "https://api.github.com/repos/octocat/hello-world/compare/{base}...{head}",
+    "contents_url": "https://api.github.com/repos/octocat/hello-world/contents/{+path}",
+    "contributors_url": "https://api.github.com/repos/octocat/hello-world/contributors",
+    "deployments_url": "https://api.github.com/repos/octocat/hello-world/deployments",
+    "downloads_url": "https://api.github.com/repos/octocat/hello-world/downloads",
+    "events_url": "https://api.github.com/repos/octocat/hello-world/events",
+    "forks_url": "https://api.github.com/repos/octocat/hello-world/forks",
+    "git_commits_url": "https://api.github.com/repos/octocat/hello-world/git/commits{/sha}",
+    "git_refs_url": "https://api.github.com/repos/octocat/hello-world/git/refs{/sha}",
+    "git_tags_url": "https://api.github.com/repos/octocat/hello-world/git/tags{/sha}",
+    "issue_comment_url": "https://api.github.com/repos/octocat/hello-world/issues/comments{/number}",
+    "issue_events_url": "https://api.github.com/repos/octocat/hello-world/issues/events{/number}",
+    "issues_url": "https://api.github.com/repos/octocat/hello-world/issues{/number}",
+    "keys_url": "https://api.github.com/repos/octocat/hello-world/keys{/key_id}",
+    "labels_url": "https://api.github.com/repos/octocat/hello-world/labels{/name}",
+    "languages_url": "https://api.github.com/repos/octocat/hello-world/languages",
+    "merges_url": "https://api.github.com/repos/octocat/hello-world/merges",
+    "milestones_url": "https://api.github.com/repos/octocat/hello-world/milestones{/number}",
+    "notifications_url": "https://api.github.com/repos/octocat/hello-world/notifications{?since,all,participating}",
+    "pulls_url": "https://api.github.com/repos/octocat/hello-world/pulls{/number}",
+    "releases_url": "https://api.github.com/repos/octocat/hello-world/releases{/id}",
+    "stargazers_url": "https://api.github.com/repos/octocat/hello-world/stargazers",
+    "statuses_url": "https://api.github.com/repos/octocat/hello-world/statuses/{sha}",
+    "subscribers_url": "https://api.github.com/repos/octocat/hello-world/subscribers",
+    "subscription_url": "https://api.github.com/repos/octocat/hello-world/subscription",
+    "tags_url": "https://api.github.com/repos/octocat/hello-world/tags",
+    "teams_url": "https://api.github.com/repos/octocat/hello-world/teams",
+    "trees_url": "https://api.github.com/repos/octocat/hello-world/git/trees{/sha}",
+    "hooks_url": "https://api.github.com/repos/octocat/hello-world/hooks",
+    "created_at": "2022-06-07T14:08:11Z",
+    "updated_at": "2022-06-09T16:29:20Z",
+    "pushed_at": "2022-06-08T15:58:49Z",
+    "git_url": "git://github.com/octocat/hello-world.git",
+    "ssh_url": "git@github.com:octocat/hello-world.git",
+    "clone_url": "https://github.com/octocat/hello-world.git",
+    "svn_url": "https://github.com/octocat/hello-world",
+    "homepage": null,
+    "size": 0,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "language": "Python",
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "forks_count": 0,
+    "mirror_url": null,
+    "archived": false,
+    "disabled": false,
+    "open_issues_count": 0,
+    "license": null,
+    "allow_forking": true,
+    "is_template": false,
+    "web_commit_signoff_required": false,
+    "topics": [],
+    "visibility": "public",
+    "forks": 0,
+    "open_issues": 0,
+    "watchers": 0,
+    "default_branch": "main"
+  },
+  "sender": {
+    "login": "github",
+    "id": 9919,
+    "node_id": "MDEyOk9yZ2FuaXphdGlvbjk5MTk=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/github",
+    "html_url": "https://github.com/github",
+    "followers_url": "https://api.github.com/users/github/followers",
+    "following_url": "https://api.github.com/users/github/following{/other_user}",
+    "gists_url": "https://api.github.com/users/github/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/github/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/github/subscriptions",
+    "organizations_url": "https://api.github.com/users/github/orgs",
+    "repos_url": "https://api.github.com/users/github/repos",
+    "events_url": "https://api.github.com/users/github/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/github/received_events",
+    "type": "Organization",
+    "site_admin": false
+  }
+}
+</code></pre>
+      </div>
       <h2 id="deploy_key">
         <a aria-hidden="" tabindex="-1" href="#deploy_key"
           ><svg
@@ -3587,8 +3985,8 @@
           >Deploy keys</a
         >" REST API.
       </p>
-      <h3 id="availability-7">
-        <a aria-hidden="" tabindex="-1" href="#availability-7"
+      <h3 id="availability-8">
+        <a aria-hidden="" tabindex="-1" href="#availability-8"
           ><svg
             aria-hidden=""
             role="img"
@@ -3612,8 +4010,8 @@
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
       </ul>
-      <h3 id="webhook-payload-object-7">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-7"
+      <h3 id="webhook-payload-object-8">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-8"
           ><svg
             aria-hidden=""
             role="img"
@@ -3693,8 +4091,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-7">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-7"
+      <h3 id="webhook-payload-example-8">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-8"
           ><svg
             aria-hidden=""
             role="img"
@@ -3871,8 +4269,8 @@
           >deployment</a
         >" REST API.
       </p>
-      <h3 id="availability-8">
-        <a aria-hidden="" tabindex="-1" href="#availability-8"
+      <h3 id="availability-9">
+        <a aria-hidden="" tabindex="-1" href="#availability-9"
           ><svg
             aria-hidden=""
             role="img"
@@ -3895,10 +4293,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>deployments</code> permission</li>
+        <li>GitHub Apps with <strong>Deployments</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-8">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-8"
+      <h3 id="webhook-payload-object-9">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-9"
           ><svg
             aria-hidden=""
             role="img"
@@ -3983,8 +4381,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-8">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-8"
+      <h3 id="webhook-payload-example-9">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-9"
           ><svg
             aria-hidden=""
             role="img"
@@ -4188,8 +4586,8 @@
           >deployments</a
         >" REST API.
       </p>
-      <h3 id="availability-9">
-        <a aria-hidden="" tabindex="-1" href="#availability-9"
+      <h3 id="availability-10">
+        <a aria-hidden="" tabindex="-1" href="#availability-10"
           ><svg
             aria-hidden=""
             role="img"
@@ -4212,10 +4610,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>deployments</code> permission</li>
+        <li>GitHub Apps with <strong>Deployments</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-9">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-9"
+      <h3 id="webhook-payload-object-10">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-10"
           ><svg
             aria-hidden=""
             role="img"
@@ -4331,8 +4729,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-9">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-9"
+      <h3 id="webhook-payload-example-10">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-10"
           ><svg
             aria-hidden=""
             role="img"
@@ -4574,8 +4972,8 @@
           >Using the GraphQL API for discussions</a
         >."
       </p>
-      <h3 id="availability-10">
-        <a aria-hidden="" tabindex="-1" href="#availability-10"
+      <h3 id="availability-11">
+        <a aria-hidden="" tabindex="-1" href="#availability-11"
           ><svg
             aria-hidden=""
             role="img"
@@ -4598,10 +4996,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>discussions</code> permission</li>
+        <li>GitHub Apps with <strong>Discussions</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-10">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-10"
+      <h3 id="webhook-payload-object-11">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-11"
           ><svg
             aria-hidden=""
             role="img"
@@ -4686,8 +5084,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-10">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-10"
+      <h3 id="webhook-payload-example-11">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-11"
           ><svg
             aria-hidden=""
             role="img"
@@ -4925,8 +5323,8 @@
           >Using the GraphQL API for discussions</a
         >."
       </p>
-      <h3 id="availability-11">
-        <a aria-hidden="" tabindex="-1" href="#availability-11"
+      <h3 id="availability-12">
+        <a aria-hidden="" tabindex="-1" href="#availability-12"
           ><svg
             aria-hidden=""
             role="img"
@@ -4949,10 +5347,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>discussions</code> permission</li>
+        <li>GitHub Apps with <strong>Discussions</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-11">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-11"
+      <h3 id="webhook-payload-object-12">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-12"
           ><svg
             aria-hidden=""
             role="img"
@@ -5045,8 +5443,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-11">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-11"
+      <h3 id="webhook-payload-example-12">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-12"
           ><svg
             aria-hidden=""
             role="img"
@@ -5311,8 +5709,8 @@
           >forks</a
         >" REST API.
       </p>
-      <h3 id="availability-12">
-        <a aria-hidden="" tabindex="-1" href="#availability-12"
+      <h3 id="availability-13">
+        <a aria-hidden="" tabindex="-1" href="#availability-13"
           ><svg
             aria-hidden=""
             role="img"
@@ -5335,10 +5733,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>contents</code> permission</li>
+        <li>GitHub Apps with <strong>Contents</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-12">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-12"
+      <h3 id="webhook-payload-object-13">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-13"
           ><svg
             aria-hidden=""
             role="img"
@@ -5419,8 +5817,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-12">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-12"
+      <h3 id="webhook-payload-example-13">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-13"
           ><svg
             aria-hidden=""
             role="img"
@@ -5695,8 +6093,8 @@
           >Identifying and authorizing users for GitHub Apps</a
         >."
       </p>
-      <h3 id="availability-13">
-        <a aria-hidden="" tabindex="-1" href="#availability-13"
+      <h3 id="availability-14">
+        <a aria-hidden="" tabindex="-1" href="#availability-14"
           ><svg
             aria-hidden=""
             role="img"
@@ -5719,8 +6117,8 @@
       <ul>
         <li>GitHub Apps</li>
       </ul>
-      <h3 id="webhook-payload-object-13">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-13"
+      <h3 id="webhook-payload-object-14">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-14"
           ><svg
             aria-hidden=""
             role="img"
@@ -5762,8 +6160,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-13">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-13"
+      <h3 id="webhook-payload-example-14">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-14"
           ><svg
             aria-hidden=""
             role="img"
@@ -5836,8 +6234,8 @@
           >About wikis</a
         >."
       </p>
-      <h3 id="availability-14">
-        <a aria-hidden="" tabindex="-1" href="#availability-14"
+      <h3 id="availability-15">
+        <a aria-hidden="" tabindex="-1" href="#availability-15"
           ><svg
             aria-hidden=""
             role="img"
@@ -5860,10 +6258,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>contents</code> permission</li>
+        <li>GitHub Apps with <strong>Contents</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-14">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-14"
+      <h3 id="webhook-payload-object-15">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-15"
           ><svg
             aria-hidden=""
             role="img"
@@ -5966,8 +6364,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-14">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-14"
+      <h3 id="webhook-payload-example-15">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-15"
           ><svg
             aria-hidden=""
             role="img"
@@ -6144,8 +6542,8 @@
           >GitHub App installation</a
         >" REST API.
       </p>
-      <h3 id="availability-15">
-        <a aria-hidden="" tabindex="-1" href="#availability-15"
+      <h3 id="availability-16">
+        <a aria-hidden="" tabindex="-1" href="#availability-16"
           ><svg
             aria-hidden=""
             role="img"
@@ -6168,8 +6566,8 @@
       <ul>
         <li>GitHub Apps</li>
       </ul>
-      <h3 id="webhook-payload-object-15">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-15"
+      <h3 id="webhook-payload-object-16">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-16"
           ><svg
             aria-hidden=""
             role="img"
@@ -6243,8 +6641,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-15">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-15"
+      <h3 id="webhook-payload-example-16">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-16"
           ><svg
             aria-hidden=""
             role="img"
@@ -6370,8 +6768,8 @@
           >GitHub App installation</a
         >" REST API.
       </p>
-      <h3 id="availability-16">
-        <a aria-hidden="" tabindex="-1" href="#availability-16"
+      <h3 id="availability-17">
+        <a aria-hidden="" tabindex="-1" href="#availability-17"
           ><svg
             aria-hidden=""
             role="img"
@@ -6394,8 +6792,8 @@
       <ul>
         <li>GitHub Apps</li>
       </ul>
-      <h3 id="webhook-payload-object-16">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-16"
+      <h3 id="webhook-payload-object-17">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-17"
           ><svg
             aria-hidden=""
             role="img"
@@ -6469,8 +6867,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-16">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-16"
+      <h3 id="webhook-payload-example-17">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-17"
           ><svg
             aria-hidden=""
             role="img"
@@ -6604,8 +7002,8 @@
           >issue comments</a
         >" REST API.
       </p>
-      <h3 id="availability-17">
-        <a aria-hidden="" tabindex="-1" href="#availability-17"
+      <h3 id="availability-18">
+        <a aria-hidden="" tabindex="-1" href="#availability-18"
           ><svg
             aria-hidden=""
             role="img"
@@ -6628,10 +7026,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>issues</code> permission</li>
+        <li>GitHub Apps with <strong>Issues</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-17">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-17"
+      <h3 id="webhook-payload-object-18">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-18"
           ><svg
             aria-hidden=""
             role="img"
@@ -6741,8 +7139,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-17">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-17"
+      <h3 id="webhook-payload-example-18">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-18"
           ><svg
             aria-hidden=""
             role="img"
@@ -7069,8 +7467,8 @@
         information, see the "<a href="/en/rest/reference/issues">issues</a>"
         REST API.
       </p>
-      <h3 id="availability-18">
-        <a aria-hidden="" tabindex="-1" href="#availability-18"
+      <h3 id="availability-19">
+        <a aria-hidden="" tabindex="-1" href="#availability-19"
           ><svg
             aria-hidden=""
             role="img"
@@ -7093,10 +7491,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>issues</code> permission</li>
+        <li>GitHub Apps with <strong>Issues</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-18">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-18"
+      <h3 id="webhook-payload-object-19">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-19"
           ><svg
             aria-hidden=""
             role="img"
@@ -7523,8 +7921,8 @@
           >labels</a
         >" REST API.
       </p>
-      <h3 id="availability-19">
-        <a aria-hidden="" tabindex="-1" href="#availability-19"
+      <h3 id="availability-20">
+        <a aria-hidden="" tabindex="-1" href="#availability-20"
           ><svg
             aria-hidden=""
             role="img"
@@ -7547,10 +7945,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>metadata</code> permission</li>
+        <li>GitHub Apps with <strong>Metadata</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-19">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-19"
+      <h3 id="webhook-payload-object-20">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-20"
           ><svg
             aria-hidden=""
             role="img"
@@ -7656,8 +8054,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-18">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-18"
+      <h3 id="webhook-payload-example-19">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-19"
           ><svg
             aria-hidden=""
             role="img"
@@ -7833,8 +8231,8 @@
           >GitHub Marketplace</a
         >."
       </p>
-      <h3 id="availability-20">
-        <a aria-hidden="" tabindex="-1" href="#availability-20"
+      <h3 id="availability-21">
+        <a aria-hidden="" tabindex="-1" href="#availability-21"
           ><svg
             aria-hidden=""
             role="img"
@@ -7857,8 +8255,8 @@
       <ul>
         <li>GitHub Apps</li>
       </ul>
-      <h3 id="webhook-payload-object-20">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-20"
+      <h3 id="webhook-payload-object-21">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-21"
           ><svg
             aria-hidden=""
             role="img"
@@ -8007,7 +8405,7 @@
       "description": "Basic Plan",
       "monthly_price_in_cents": 1000,
       "yearly_price_in_cents": 10000,
-      "price_model": "per-unit",
+      "price_model": "PER_UNIT",
       "has_free_trial": true,
       "unit_name": "seat",
       "bullets": [
@@ -8048,8 +8446,8 @@
           >collaborators</a
         >" REST API.
       </p>
-      <h3 id="availability-21">
-        <a aria-hidden="" tabindex="-1" href="#availability-21"
+      <h3 id="availability-22">
+        <a aria-hidden="" tabindex="-1" href="#availability-22"
           ><svg
             aria-hidden=""
             role="img"
@@ -8072,10 +8470,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>members</code> permission</li>
+        <li>GitHub Apps with <strong>Members</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-21">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-21"
+      <h3 id="webhook-payload-object-22">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-22"
           ><svg
             aria-hidden=""
             role="img"
@@ -8189,8 +8587,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-19">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-19"
+      <h3 id="webhook-payload-example-20">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-20"
           ><svg
             aria-hidden=""
             role="img"
@@ -8378,8 +8776,8 @@
           >team members</a
         >" REST API.
       </p>
-      <h3 id="availability-22">
-        <a aria-hidden="" tabindex="-1" href="#availability-22"
+      <h3 id="availability-23">
+        <a aria-hidden="" tabindex="-1" href="#availability-23"
           ><svg
             aria-hidden=""
             role="img"
@@ -8401,10 +8799,10 @@
       </h3>
       <ul>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>members</code> permission</li>
+        <li>GitHub Apps with <strong>Members</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-22">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-22"
+      <h3 id="webhook-payload-object-23">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-23"
           ><svg
             aria-hidden=""
             role="img"
@@ -8495,8 +8893,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-20">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-20"
+      <h3 id="webhook-payload-example-21">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-21"
           ><svg
             aria-hidden=""
             role="img"
@@ -8590,6 +8988,355 @@
 }
 </code></pre>
       </div>
+      <h2 id="merge_group">
+        <a aria-hidden="" tabindex="-1" href="#merge_group"
+          ><svg
+            aria-hidden=""
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            fill="currentColor"
+            style="
+              display: inline-block;
+              user-select: none;
+              vertical-align: middle;
+            "
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+            ></path></svg></a
+        >merge_group
+      </h2>
+      <div>
+        <p>
+          <strong>Note:</strong> The pull request merge queue feature is
+          currently in limited public beta and subject to change.
+        </p>
+      </div>
+      <p>
+        Activity related to merge groups in a merge queue. The type of activity
+        is specified in the action property of the payload object.
+      </p>
+      <h3 id="availability-24">
+        <a aria-hidden="" tabindex="-1" href="#availability-24"
+          ><svg
+            aria-hidden=""
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            fill="currentColor"
+            style="
+              display: inline-block;
+              user-select: none;
+              vertical-align: middle;
+            "
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+            ></path></svg></a
+        >Availability
+      </h3>
+      <ul>
+        <li>Repository webhooks</li>
+        <li>Organization webhooks</li>
+        <li>GitHub Apps with <strong>Merge queues</strong> permission</li>
+      </ul>
+      <h3 id="webhook-payload-object-24">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-24"
+          ><svg
+            aria-hidden=""
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            fill="currentColor"
+            style="
+              display: inline-block;
+              user-select: none;
+              vertical-align: middle;
+            "
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+            ></path></svg></a
+        >Webhook payload object
+      </h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>action</code></td>
+            <td><code>string</code></td>
+            <td>
+              The action that was performed. Currently, can only be
+              <code>checks_requested</code>.
+            </td>
+          </tr>
+          <tr>
+            <td><code>merge_group</code></td>
+            <td><code>object</code></td>
+            <td>The merge group.</td>
+          </tr>
+          <tr>
+            <td><code>merge_group[head_sha]</code></td>
+            <td><code>string</code></td>
+            <td>The SHA of the merge group.</td>
+          </tr>
+          <tr>
+            <td><code>merge_group[head_ref]</code></td>
+            <td><code>string</code></td>
+            <td>The full ref of the merge group.</td>
+          </tr>
+          <tr>
+            <td><code>merge_group[base_sha]</code></td>
+            <td><code>string</code></td>
+            <td>The SHA of the merge group's parent commit.</td>
+          </tr>
+          <tr>
+            <td><code>merge_group[base_ref]</code></td>
+            <td><code>string</code></td>
+            <td>
+              The full ref of the branch the merge group will be merged into.
+            </td>
+          </tr>
+          <tr>
+            <td><code>merge_group[head_commit]</code></td>
+            <td><code>object</code></td>
+            <td>
+              An expanded representation of the <code>head_sha</code> commit.
+            </td>
+          </tr>
+          <tr>
+            <td><code>repository</code></td>
+            <td><code>object</code></td>
+            <td>
+              The
+              <a href="/en/rest/reference/repos#get-a-repository"
+                ><code>repository</code></a
+              >
+              where the event occurred.
+            </td>
+          </tr>
+          <tr>
+            <td><code>organization</code></td>
+            <td><code>object</code></td>
+            <td>
+              Webhook payloads contain the
+              <a href="/en/rest/reference/orgs#get-an-organization"
+                ><code>organization</code></a
+              >
+              object when the webhook is configured for an organization or the
+              event occurs from activity in a repository owned by an
+              organization.
+            </td>
+          </tr>
+          <tr>
+            <td><code>installation</code></td>
+            <td><code>object</code></td>
+            <td>
+              The GitHub App installation. Webhook payloads contain the
+              <code>installation</code> property when the event is configured
+              for and sent to a GitHub App.
+            </td>
+          </tr>
+          <tr>
+            <td><code>sender</code></td>
+            <td><code>object</code></td>
+            <td>The user that triggered the event.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id="webhook-payload-example-22">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-22"
+          ><svg
+            aria-hidden=""
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            fill="currentColor"
+            style="
+              display: inline-block;
+              user-select: none;
+              vertical-align: middle;
+            "
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+            ></path></svg></a
+        >Webhook payload example
+      </h3>
+      <div data-highlight="json">
+        <pre><code>{
+  "action": "checks_requested",
+  "merge_group": {
+    "head_sha": "2ffea6db159f6b6c47a24e778fb9ef40cf6b1c7d",
+    "head_ref": "refs/heads/gh-readonly-queue/main/pr-104-929f8209d40f77f4abc622a499c93a83babdbe64",
+    "base_sha": "380387fbc80638b734a49e1be1c4dfec1c01b33c",
+    "base_ref": "refs/heads/main",
+    "head_commit": {
+      "id": "ec26c3e57ca3a959ca5aad62de7213c562f8c821",
+      "tree_id": "31b122c26a97cf9af023e9ddab94a82c6e77b0ea",
+      "message": "Merge pull request #2048 from octo-repo/update-readme\n\nUpdate README.md",
+      "timestamp": "2019-05-15T15:20:30Z",
+      "author": {
+        "name": "Codertocat",
+        "email": "21031067+Codertocat@users.noreply.github.com"
+      },
+      "committer": {
+        "name": "Codertocat",
+        "email": "21031067+Codertocat@users.noreply.github.com"
+      }
+    }
+  },
+  "repository": {
+    "id": 17273051,
+    "node_id": "MDEwOlJlcG9zaXRvcnkxNzI3MzA1MQ==",
+    "name": "octo-repo",
+    "full_name": "octo-org/octo-repo",
+    "private": true,
+    "owner": {
+      "login": "octo-org",
+      "id": 6811672,
+      "node_id": "MDEyOk9yZ2FuaXphdGlvbjY4MTE2NzI=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6811672?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/octo-org",
+      "html_url": "https://github.com/octo-org",
+      "followers_url": "https://api.github.com/users/octo-org/followers",
+      "following_url": "https://api.github.com/users/octo-org/following{/other_user}",
+      "gists_url": "https://api.github.com/users/octo-org/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/octo-org/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/octo-org/subscriptions",
+      "organizations_url": "https://api.github.com/users/octo-org/orgs",
+      "repos_url": "https://api.github.com/users/octo-org/repos",
+      "events_url": "https://api.github.com/users/octo-org/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/octo-org/received_events",
+      "type": "Organization",
+      "site_admin": false
+    },
+    "html_url": "https://github.com/octo-org/octo-repo",
+    "description": "My first repo on GitHub!",
+    "fork": false,
+    "url": "https://api.github.com/repos/octo-org/octo-repo",
+    "forks_url": "https://api.github.com/repos/octo-org/octo-repo/forks",
+    "keys_url": "https://api.github.com/repos/octo-org/octo-repo/keys{/key_id}",
+    "collaborators_url": "https://api.github.com/repos/octo-org/octo-repo/collaborators{/collaborator}",
+    "teams_url": "https://api.github.com/repos/octo-org/octo-repo/teams",
+    "hooks_url": "https://api.github.com/repos/octo-org/octo-repo/hooks",
+    "issue_events_url": "https://api.github.com/repos/octo-org/octo-repo/issues/events{/number}",
+    "events_url": "https://api.github.com/repos/octo-org/octo-repo/events",
+    "assignees_url": "https://api.github.com/repos/octo-org/octo-repo/assignees{/user}",
+    "branches_url": "https://api.github.com/repos/octo-org/octo-repo/branches{/branch}",
+    "tags_url": "https://api.github.com/repos/octo-org/octo-repo/tags",
+    "blobs_url": "https://api.github.com/repos/octo-org/octo-repo/git/blobs{/sha}",
+    "git_tags_url": "https://api.github.com/repos/octo-org/octo-repo/git/tags{/sha}",
+    "git_refs_url": "https://api.github.com/repos/octo-org/octo-repo/git/refs{/sha}",
+    "trees_url": "https://api.github.com/repos/octo-org/octo-repo/git/trees{/sha}",
+    "statuses_url": "https://api.github.com/repos/octo-org/octo-repo/statuses/{sha}",
+    "languages_url": "https://api.github.com/repos/octo-org/octo-repo/languages",
+    "stargazers_url": "https://api.github.com/repos/octo-org/octo-repo/stargazers",
+    "contributors_url": "https://api.github.com/repos/octo-org/octo-repo/contributors",
+    "subscribers_url": "https://api.github.com/repos/octo-org/octo-repo/subscribers",
+    "subscription_url": "https://api.github.com/repos/octo-org/octo-repo/subscription",
+    "commits_url": "https://api.github.com/repos/octo-org/octo-repo/commits{/sha}",
+    "git_commits_url": "https://api.github.com/repos/octo-org/octo-repo/git/commits{/sha}",
+    "comments_url": "https://api.github.com/repos/octo-org/octo-repo/comments{/number}",
+    "issue_comment_url": "https://api.github.com/repos/octo-org/octo-repo/issues/comments{/number}",
+    "contents_url": "https://api.github.com/repos/octo-org/octo-repo/contents/{+path}",
+    "compare_url": "https://api.github.com/repos/octo-org/octo-repo/compare/{base}...{head}",
+    "merges_url": "https://api.github.com/repos/octo-org/octo-repo/merges",
+    "archive_url": "https://api.github.com/repos/octo-org/octo-repo/{archive_format}{/ref}",
+    "downloads_url": "https://api.github.com/repos/octo-org/octo-repo/downloads",
+    "issues_url": "https://api.github.com/repos/octo-org/octo-repo/issues{/number}",
+    "pulls_url": "https://api.github.com/repos/octo-org/octo-repo/pulls{/number}",
+    "milestones_url": "https://api.github.com/repos/octo-org/octo-repo/milestones{/number}",
+    "notifications_url": "https://api.github.com/repos/octo-org/octo-repo/notifications{?since,all,participating}",
+    "labels_url": "https://api.github.com/repos/octo-org/octo-repo/labels{/name}",
+    "releases_url": "https://api.github.com/repos/octo-org/octo-repo/releases{/id}",
+    "deployments_url": "https://api.github.com/repos/octo-org/octo-repo/deployments",
+    "created_at": "2014-02-28T02:42:51Z",
+    "updated_at": "2021-03-11T14:54:13Z",
+    "pushed_at": "2021-03-11T14:54:10Z",
+    "git_url": "git://github.com/octo-org/octo-repo.git",
+    "ssh_url": "org-6811672@github.com:octo-org/octo-repo.git",
+    "clone_url": "https://github.com/octo-org/octo-repo.git",
+    "svn_url": "https://github.com/octo-org/octo-repo",
+    "homepage": "",
+    "size": 300,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "language": "JavaScript",
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": true,
+    "forks_count": 0,
+    "mirror_url": null,
+    "archived": false,
+    "disabled": false,
+    "open_issues_count": 39,
+    "license": null,
+    "forks": 0,
+    "open_issues": 39,
+    "watchers": 0,
+    "default_branch": "main"
+  },
+  "organization": {
+    "login": "octo-org",
+    "id": 6811672,
+    "node_id": "MDEyOk9yZ2FuaXphdGlvbjY4MTE2NzI=",
+    "url": "https://api.github.com/orgs/octo-org",
+    "repos_url": "https://api.github.com/orgs/octo-org/repos",
+    "events_url": "https://api.github.com/orgs/octo-org/events",
+    "hooks_url": "https://api.github.com/orgs/octo-org/hooks",
+    "issues_url": "https://api.github.com/orgs/octo-org/issues",
+    "members_url": "https://api.github.com/orgs/octo-org/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/octo-org/public_members{/member}",
+    "avatar_url": "https://avatars.githubusercontent.com/u/6811672?v=4",
+    "description": "Working better together!"
+  },
+  "sender": {
+    "login": "Codertocat",
+    "id": 21031067,
+    "node_id": "MDQ6VXNlcjIxMDMxMDY3",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/21031067?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Codertocat",
+    "html_url": "https://github.com/Codertocat",
+    "followers_url": "https://api.github.com/users/Codertocat/followers",
+    "following_url": "https://api.github.com/users/Codertocat/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Codertocat/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Codertocat/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Codertocat/subscriptions",
+    "organizations_url": "https://api.github.com/users/Codertocat/orgs",
+    "repos_url": "https://api.github.com/users/Codertocat/repos",
+    "events_url": "https://api.github.com/users/Codertocat/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Codertocat/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "installation": {
+    "id": 1,
+    "node_id": "MDEyOk9yZ2FuaXphdGlvbjY4MTE2NzI="
+  }
+}
+</code></pre>
+      </div>
       <h2 id="meta">
         <a aria-hidden="" tabindex="-1" href="#meta"
           ><svg
@@ -8617,8 +9364,8 @@
         on. Therefore, it must be selected for each hook that you'd like to
         receive meta events for.
       </p>
-      <h3 id="availability-23">
-        <a aria-hidden="" tabindex="-1" href="#availability-23"
+      <h3 id="availability-25">
+        <a aria-hidden="" tabindex="-1" href="#availability-25"
           ><svg
             aria-hidden=""
             role="img"
@@ -8642,8 +9389,8 @@
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
       </ul>
-      <h3 id="webhook-payload-object-23">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-23"
+      <h3 id="webhook-payload-object-25">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-25"
           ><svg
             aria-hidden=""
             role="img"
@@ -8723,8 +9470,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-21">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-21"
+      <h3 id="webhook-payload-example-23">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-23"
           ><svg
             aria-hidden=""
             role="img"
@@ -8908,8 +9655,8 @@
           >milestones</a
         >" REST API.
       </p>
-      <h3 id="availability-24">
-        <a aria-hidden="" tabindex="-1" href="#availability-24"
+      <h3 id="availability-26">
+        <a aria-hidden="" tabindex="-1" href="#availability-26"
           ><svg
             aria-hidden=""
             role="img"
@@ -8932,10 +9679,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>pull_requests</code> permission</li>
+        <li>GitHub Apps with <strong>Pull requests</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-24">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-24"
+      <h3 id="webhook-payload-object-26">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-26"
           ><svg
             aria-hidden=""
             role="img"
@@ -9051,8 +9798,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-22">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-22"
+      <h3 id="webhook-payload-example-24">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-24"
           ><svg
             aria-hidden=""
             role="img"
@@ -9257,8 +10004,8 @@
           >organizations</a
         >" REST API.
       </p>
-      <h3 id="availability-25">
-        <a aria-hidden="" tabindex="-1" href="#availability-25"
+      <h3 id="availability-27">
+        <a aria-hidden="" tabindex="-1" href="#availability-27"
           ><svg
             aria-hidden=""
             role="img"
@@ -9284,10 +10031,10 @@
           <code>added</code>, <code>removed</code>, <code>renamed</code>, and
           <code>invited</code> events
         </li>
-        <li>GitHub Apps with the <code>members</code> permission</li>
+        <li>GitHub Apps with <strong>Members</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-25">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-25"
+      <h3 id="webhook-payload-object-27">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-27"
           ><svg
             aria-hidden=""
             role="img"
@@ -9372,8 +10119,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-23">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-23"
+      <h3 id="webhook-payload-example-25">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-25"
           ><svg
             aria-hidden=""
             role="img"
@@ -9488,8 +10235,8 @@
           >blocking organization users</a
         >" REST API.
       </p>
-      <h3 id="availability-26">
-        <a aria-hidden="" tabindex="-1" href="#availability-26"
+      <h3 id="availability-28">
+        <a aria-hidden="" tabindex="-1" href="#availability-28"
           ><svg
             aria-hidden=""
             role="img"
@@ -9512,12 +10259,12 @@
       <ul>
         <li>Organization webhooks</li>
         <li>
-          GitHub Apps with the
-          <code>organization_administration</code> permission
+          GitHub Apps with <strong>Administration</strong> organization
+          permission
         </li>
       </ul>
-      <h3 id="webhook-payload-object-26">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-26"
+      <h3 id="webhook-payload-object-28">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-28"
           ><svg
             aria-hidden=""
             role="img"
@@ -9589,8 +10336,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-24">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-24"
+      <h3 id="webhook-payload-example-26">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-26"
           ><svg
             aria-hidden=""
             role="img"
@@ -9699,8 +10446,8 @@
           >Managing packages with GitHub Packages</a
         >" to learn more about GitHub Packages.
       </p>
-      <h3 id="availability-27">
-        <a aria-hidden="" tabindex="-1" href="#availability-27"
+      <h3 id="availability-29">
+        <a aria-hidden="" tabindex="-1" href="#availability-29"
           ><svg
             aria-hidden=""
             role="img"
@@ -9724,8 +10471,8 @@
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
       </ul>
-      <h3 id="webhook-payload-object-27">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-27"
+      <h3 id="webhook-payload-object-29">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-29"
           ><svg
             aria-hidden=""
             role="img"
@@ -9799,8 +10546,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-25">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-25"
+      <h3 id="webhook-payload-example-27">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-27"
           ><svg
             aria-hidden=""
             role="img"
@@ -10094,8 +10841,8 @@
         for project pages, the default branch for user and organization pages)
         triggers this event.
       </p>
-      <h3 id="availability-28">
-        <a aria-hidden="" tabindex="-1" href="#availability-28"
+      <h3 id="availability-30">
+        <a aria-hidden="" tabindex="-1" href="#availability-30"
           ><svg
             aria-hidden=""
             role="img"
@@ -10118,10 +10865,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>pages</code> permission</li>
+        <li>GitHub Apps with <strong>Pages</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-28">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-28"
+      <h3 id="webhook-payload-object-30">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-30"
           ><svg
             aria-hidden=""
             role="img"
@@ -10207,8 +10954,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-26">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-26"
+      <h3 id="webhook-payload-example-28">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-28"
           ><svg
             aria-hidden=""
             role="img"
@@ -10409,8 +11156,8 @@
         >
         endpoint.
       </p>
-      <h3 id="availability-29">
-        <a aria-hidden="" tabindex="-1" href="#availability-29"
+      <h3 id="availability-31">
+        <a aria-hidden="" tabindex="-1" href="#availability-31"
           ><svg
             aria-hidden=""
             role="img"
@@ -10438,8 +11185,8 @@
           register the app
         </li>
       </ul>
-      <h3 id="webhook-payload-object-29">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-29"
+      <h3 id="webhook-payload-object-31">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-31"
           ><svg
             aria-hidden=""
             role="img"
@@ -10535,8 +11282,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-27">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-27"
+      <h3 id="webhook-payload-example-29">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-29"
           ><svg
             aria-hidden=""
             role="img"
@@ -10723,13 +11470,13 @@
         >project
       </h2>
       <p>
-        Activity related to project boards. The type of activity is specified in
-        the <code>action</code> property of the payload object. For more
+        Activity related to classic projects. The type of activity is specified
+        in the <code>action</code> property of the payload object. For more
         information, see the "<a href="/en/rest/reference/projects">projects</a
         >" REST API.
       </p>
-      <h3 id="availability-30">
-        <a aria-hidden="" tabindex="-1" href="#availability-30"
+      <h3 id="availability-32">
+        <a aria-hidden="" tabindex="-1" href="#availability-32"
           ><svg
             aria-hidden=""
             role="img"
@@ -10753,17 +11500,17 @@
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
         <li>
-          GitHub Apps with the <code>repository_projects</code> or
-          <code>organization_projects</code> permission
+          GitHub Apps with <strong>Projects</strong> repository or organization
+          permission
         </li>
       </ul>
       <div>
         <p>
-          <strong>Note</strong>: This event does not occur for Projects (beta).
+          <strong>Note</strong>: This event only occurs for projects (classic).
         </p>
       </div>
-      <h3 id="webhook-payload-object-30">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-30"
+      <h3 id="webhook-payload-object-32">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-32"
           ><svg
             aria-hidden=""
             role="img"
@@ -10872,8 +11619,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-28">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-28"
+      <h3 id="webhook-payload-example-30">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-30"
           ><svg
             aria-hidden=""
             role="img"
@@ -11069,14 +11816,14 @@
         >project_card
       </h2>
       <p>
-        Activity related to project cards. The type of activity is specified in
-        the <code>action</code> property of the payload object. For more
-        information, see the "<a href="/en/rest/reference/projects#cards"
+        Activity related to cards in a classic project. The type of activity is
+        specified in the <code>action</code> property of the payload object. For
+        more information, see the "<a href="/en/rest/reference/projects#cards"
           >project cards</a
         >" REST API.
       </p>
-      <h3 id="availability-31">
-        <a aria-hidden="" tabindex="-1" href="#availability-31"
+      <h3 id="availability-33">
+        <a aria-hidden="" tabindex="-1" href="#availability-33"
           ><svg
             aria-hidden=""
             role="img"
@@ -11100,17 +11847,17 @@
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
         <li>
-          GitHub Apps with the <code>repository_projects</code> or
-          <code>organization_projects</code> permission
+          GitHub Apps with <strong>Projects</strong> repository or organization
+          permission
         </li>
       </ul>
       <div>
         <p>
-          <strong>Note</strong>: This event does not occur for Projects (beta).
+          <strong>Note</strong>: This event only occurs for projects (classic).
         </p>
       </div>
-      <h3 id="webhook-payload-object-31">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-31"
+      <h3 id="webhook-payload-object-33">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-33"
           ><svg
             aria-hidden=""
             role="img"
@@ -11223,8 +11970,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-29">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-29"
+      <h3 id="webhook-payload-example-31">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-31"
           ><svg
             aria-hidden=""
             role="img"
@@ -11418,14 +12165,15 @@
         >project_column
       </h2>
       <p>
-        Activity related to columns in a project board. The type of activity is
-        specified in the <code>action</code> property of the payload object. For
-        more information, see the "<a href="/en/rest/reference/projects#columns"
+        Activity related to columns in a classic project. The type of activity
+        is specified in the <code>action</code> property of the payload object.
+        For more information, see the "<a
+          href="/en/rest/reference/projects#columns"
           >project columns</a
         >" REST API.
       </p>
-      <h3 id="availability-32">
-        <a aria-hidden="" tabindex="-1" href="#availability-32"
+      <h3 id="availability-34">
+        <a aria-hidden="" tabindex="-1" href="#availability-34"
           ><svg
             aria-hidden=""
             role="img"
@@ -11449,12 +12197,17 @@
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
         <li>
-          GitHub Apps with the <code>repository_projects</code> or
-          <code>organization_projects</code> permission
+          GitHub Apps with <strong>Projects</strong> repository or organization
+          permission
         </li>
       </ul>
-      <h3 id="webhook-payload-object-32">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-32"
+      <div>
+        <p>
+          <strong>Note</strong>: This event only occurs for projects (classic).
+        </p>
+      </div>
+      <h3 id="webhook-payload-object-34">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-34"
           ><svg
             aria-hidden=""
             role="img"
@@ -11567,8 +12320,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-30">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-30"
+      <h3 id="webhook-payload-example-32">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-32"
           ><svg
             aria-hidden=""
             role="img"
@@ -11741,24 +12494,24 @@
       </h2>
       <div>
         <p>
-          <strong>Note:</strong> Webhook events for Projects (beta) are
-          currently in beta and subject to change. To share feedback about
-          Projects (beta) webhooks with GitHub, see the
-          <a href="https://github.com/github/feedback/discussions/17405"
-            >Projects (beta) webhook feedback discussion</a
+          <strong>Note:</strong> Webhook events for projects are currently in
+          beta and subject to change. To share feedback about projects webhooks
+          with GitHub, see the
+          <a href="https://github.com/orgs/community/discussions/17405"
+            >Projects webhook feedback discussion</a
           >.
         </p>
       </div>
       <p>
-        Activity related to items in a Projects (beta) project. The type of
-        activity is specified in the <code>action</code> property of the payload
-        object. For more information, see "<a
-          href="/en/issues/trying-out-the-new-projects-experience/about-projects"
-          >About projects (beta)</a
+        Activity related to items in a project. The type of activity is
+        specified in the <code>action</code> property of the payload object. For
+        more information, see "<a
+          href="/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects"
+          >About projects</a
         >."
       </p>
-      <h3 id="availability-33">
-        <a aria-hidden="" tabindex="-1" href="#availability-33"
+      <h3 id="availability-35">
+        <a aria-hidden="" tabindex="-1" href="#availability-35"
           ><svg
             aria-hidden=""
             role="img"
@@ -11781,11 +12534,11 @@
       <ul>
         <li>Organization webhooks</li>
         <li>
-          GitHub Apps with the <code>organization_projects</code> permission
+          GitHub Apps with <strong>Projects</strong> organization permission
         </li>
       </ul>
-      <h3 id="webhook-payload-object-33">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-33"
+      <h3 id="webhook-payload-object-35">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-35"
           ><svg
             aria-hidden=""
             role="img"
@@ -11834,8 +12587,8 @@
               project item) and <code>project_node_id</code> (the node ID of the
               project) to query information in the GraphQL API. For more
               information, see "<a
-                href="/en/issues/trying-out-the-new-projects-experience/using-the-api-to-manage-projects"
-                >Using the API to manage projects (beta)</a
+                href="/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-api-to-manage-projects"
+                >Using the API to manage projects</a
               >."
             </td>
           </tr>
@@ -11873,8 +12626,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-31">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-31"
+      <h3 id="webhook-payload-example-33">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-33"
           ><svg
             aria-hidden=""
             role="img"
@@ -11989,8 +12742,8 @@
         When a private repository is made public. Without a doubt: the best
         GitHub event.
       </p>
-      <h3 id="availability-34">
-        <a aria-hidden="" tabindex="-1" href="#availability-34"
+      <h3 id="availability-36">
+        <a aria-hidden="" tabindex="-1" href="#availability-36"
           ><svg
             aria-hidden=""
             role="img"
@@ -12013,10 +12766,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>metadata</code> permission</li>
+        <li>GitHub Apps with <strong>Metadata</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-34">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-34"
+      <h3 id="webhook-payload-object-36">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-36"
           ><svg
             aria-hidden=""
             role="img"
@@ -12086,8 +12839,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-32">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-32"
+      <h3 id="webhook-payload-example-34">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-34"
           ><svg
             aria-hidden=""
             role="img"
@@ -12254,8 +13007,14 @@
           >pull requests</a
         >" REST API.
       </p>
-      <h3 id="availability-35">
-        <a aria-hidden="" tabindex="-1" href="#availability-35"
+      <div>
+        <p>
+          <strong>Note:</strong> The pull request merge queue feature is
+          currently in limited public beta and subject to change.
+        </p>
+      </div>
+      <h3 id="availability-37">
+        <a aria-hidden="" tabindex="-1" href="#availability-37"
           ><svg
             aria-hidden=""
             role="img"
@@ -12278,10 +13037,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>pull_requests</code> permission</li>
+        <li>GitHub Apps with <strong>Pull requests</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-35">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-35"
+      <h3 id="webhook-payload-object-37">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-37"
           ><svg
             aria-hidden=""
             role="img"
@@ -12328,7 +13087,15 @@
                   <code>true</code>, the pull request was merged.
                 </li>
                 <li><code>converted_to_draft</code></li>
+                <li>
+                  <code>dequeued</code>: Triggered when a pull request is
+                  removed from a merge queue
+                </li>
                 <li><code>edited</code></li>
+                <li>
+                  <code>enqueued</code>: Triggered when a pull request is added
+                  to a merge queue
+                </li>
                 <li><code>labeled</code></li>
                 <li><code>locked</code></li>
                 <li><code>opened</code></li>
@@ -12384,6 +13151,14 @@
             </td>
           </tr>
           <tr>
+            <td><code>reason</code></td>
+            <td><code>string</code></td>
+            <td>
+              The reason the pull request was removed from a merge queue if the
+              action was <code>dequeued</code>.
+            </td>
+          </tr>
+          <tr>
             <td><code>repository</code></td>
             <td><code>object</code></td>
             <td>
@@ -12423,8 +13198,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-33">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-33"
+      <h3 id="webhook-payload-example-35">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-35"
           ><svg
             aria-hidden=""
             role="img"
@@ -12934,8 +13709,8 @@
           >pull request reviews</a
         >" REST API.
       </p>
-      <h3 id="availability-36">
-        <a aria-hidden="" tabindex="-1" href="#availability-36"
+      <h3 id="availability-38">
+        <a aria-hidden="" tabindex="-1" href="#availability-38"
           ><svg
             aria-hidden=""
             role="img"
@@ -12958,10 +13733,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>pull_requests</code> permission</li>
+        <li>GitHub Apps with <strong>Pull requests</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-36">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-36"
+      <h3 id="webhook-payload-object-38">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-38"
           ><svg
             aria-hidden=""
             role="img"
@@ -13069,8 +13844,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-34">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-34"
+      <h3 id="webhook-payload-example-36">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-36"
           ><svg
             aria-hidden=""
             role="img"
@@ -13601,8 +14376,8 @@
           >pull request review comments</a
         >" REST API.
       </p>
-      <h3 id="availability-37">
-        <a aria-hidden="" tabindex="-1" href="#availability-37"
+      <h3 id="availability-39">
+        <a aria-hidden="" tabindex="-1" href="#availability-39"
           ><svg
             aria-hidden=""
             role="img"
@@ -13625,10 +14400,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>pull_requests</code> permission</li>
+        <li>GitHub Apps with <strong>Pull requests</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-37">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-37"
+      <h3 id="webhook-payload-object-39">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-39"
           ><svg
             aria-hidden=""
             role="img"
@@ -13738,8 +14513,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-35">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-35"
+      <h3 id="webhook-payload-example-37">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-37"
           ><svg
             aria-hidden=""
             role="img"
@@ -14277,8 +15052,8 @@
         resolved or unresolved. The type of activity is specified in the
         <code>action</code> property of the payload object.
       </p>
-      <h3 id="availability-38">
-        <a aria-hidden="" tabindex="-1" href="#availability-38"
+      <h3 id="availability-40">
+        <a aria-hidden="" tabindex="-1" href="#availability-40"
           ><svg
             aria-hidden=""
             role="img"
@@ -14301,10 +15076,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>pull_requests</code> permission</li>
+        <li>GitHub Apps with <strong>Pull requests</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-38">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-38"
+      <h3 id="webhook-payload-object-40">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-40"
           ><svg
             aria-hidden=""
             role="img"
@@ -14404,8 +15179,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-36">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-36"
+      <h3 id="webhook-payload-example-38">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-38"
           ><svg
             aria-hidden=""
             role="img"
@@ -14998,8 +15773,8 @@
           when you push more than three tags at once.
         </p>
       </div>
-      <h3 id="availability-39">
-        <a aria-hidden="" tabindex="-1" href="#availability-39"
+      <h3 id="availability-41">
+        <a aria-hidden="" tabindex="-1" href="#availability-41"
           ><svg
             aria-hidden=""
             role="img"
@@ -15022,10 +15797,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>contents</code> permission</li>
+        <li>GitHub Apps with <strong>Contents</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-39">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-39"
+      <h3 id="webhook-payload-object-41">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-41"
           ><svg
             aria-hidden=""
             role="img"
@@ -15175,17 +15950,29 @@
           <tr>
             <td><code>commits[][added]</code></td>
             <td><code>array</code></td>
-            <td>An array of files added in the commit.</td>
+            <td>
+              An array of files added in the commit. For extremely large commits
+              where GitHub is unable to calculate this list in a timely manner,
+              this may be empty even if files were added.
+            </td>
           </tr>
           <tr>
             <td><code>commits[][modified]</code></td>
             <td><code>array</code></td>
-            <td>An array of files modified by the commit.</td>
+            <td>
+              An array of files modified by the commit. For extremely large
+              commits where GitHub is unable to calculate this list in a timely
+              manner, this may be empty even if files were modified.
+            </td>
           </tr>
           <tr>
             <td><code>commits[][removed]</code></td>
             <td><code>array</code></td>
-            <td>An array of files removed in the commit.</td>
+            <td>
+              An array of files removed in the commit. For extremely large
+              commits where GitHub is unable to calculate this list in a timely
+              manner, this may be empty even if files were removed.
+            </td>
           </tr>
           <tr>
             <td><code>pusher</code></td>
@@ -15232,8 +16019,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-37">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-37"
+      <h3 id="webhook-payload-example-39">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-39"
           ><svg
             aria-hidden=""
             role="img"
@@ -15439,8 +16226,8 @@
         information, see the "<a href="/en/rest/reference/releases">releases</a
         >" REST API.
       </p>
-      <h3 id="availability-40">
-        <a aria-hidden="" tabindex="-1" href="#availability-40"
+      <h3 id="availability-42">
+        <a aria-hidden="" tabindex="-1" href="#availability-42"
           ><svg
             aria-hidden=""
             role="img"
@@ -15463,10 +16250,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>contents</code> permission</li>
+        <li>GitHub Apps with <strong>Contents</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-40">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-40"
+      <h3 id="webhook-payload-object-42">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-42"
           ><svg
             aria-hidden=""
             role="img"
@@ -15595,8 +16382,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-38">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-38"
+      <h3 id="webhook-payload-example-40">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-40"
           ><svg
             aria-hidden=""
             role="img"
@@ -15803,8 +16590,8 @@
           >Create a repository dispatch event</a
         >" endpoint.
       </p>
-      <h3 id="availability-41">
-        <a aria-hidden="" tabindex="-1" href="#availability-41"
+      <h3 id="availability-43">
+        <a aria-hidden="" tabindex="-1" href="#availability-43"
           ><svg
             aria-hidden=""
             role="img"
@@ -15825,13 +16612,10 @@
         >Availability
       </h3>
       <ul>
-        <li>
-          GitHub Apps must have the <code>contents</code> permission to receive
-          this webhook.
-        </li>
+        <li>GitHub Apps with <strong>Contents</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-example-39">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-39"
+      <h3 id="webhook-payload-example-41">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-41"
           ><svg
             aria-hidden=""
             role="img"
@@ -16020,8 +16804,8 @@
         information, see the "<a href="/en/rest/reference/repos">repositories</a
         >" REST API.
       </p>
-      <h3 id="availability-42">
-        <a aria-hidden="" tabindex="-1" href="#availability-42"
+      <h3 id="availability-44">
+        <a aria-hidden="" tabindex="-1" href="#availability-44"
           ><svg
             aria-hidden=""
             role="img"
@@ -16048,12 +16832,12 @@
         </li>
         <li>Organization webhooks</li>
         <li>
-          GitHub Apps with the <code>metadata</code> permission receive all
+          GitHub Apps with <strong>Metadata</strong> permission receive all
           event types except <code>deleted</code>
         </li>
       </ul>
-      <h3 id="webhook-payload-object-41">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-41"
+      <h3 id="webhook-payload-object-43">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-43"
           ><svg
             aria-hidden=""
             role="img"
@@ -16143,8 +16927,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-40">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-40"
+      <h3 id="webhook-payload-example-42">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-42"
           ><svg
             aria-hidden=""
             role="img"
@@ -16322,8 +17106,8 @@
           >Source imports API</a
         >.
       </p>
-      <h3 id="availability-43">
-        <a aria-hidden="" tabindex="-1" href="#availability-43"
+      <h3 id="availability-45">
+        <a aria-hidden="" tabindex="-1" href="#availability-45"
           ><svg
             aria-hidden=""
             role="img"
@@ -16347,8 +17131,8 @@
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
       </ul>
-      <h3 id="webhook-payload-object-42">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-42"
+      <h3 id="webhook-payload-object-44">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-44"
           ><svg
             aria-hidden=""
             role="img"
@@ -16418,8 +17202,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-41">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-41"
+      <h3 id="webhook-payload-example-43">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-43"
           ><svg
             aria-hidden=""
             role="img"
@@ -16593,6 +17377,15 @@
             ></path></svg></a
         >repository_vulnerability_alert
       </h2>
+      <div class="warning">
+        <p>
+          <strong>Deprecation note</strong>: The
+          <code>repository_vulnerability_alert</code> webhook events described
+          below are deprecated and are documented here for reference only. Use
+          <a href="#dependabot_alert"><code>dependabot_alert</code></a> as an
+          alternative.
+        </p>
+      </div>
       <p>
         Activity related to security vulnerability alerts in a repository. The
         type of activity is specified in the <code>action</code> property of the
@@ -16601,8 +17394,8 @@
           >About Dependabot alerts</a
         >".
       </p>
-      <h3 id="availability-44">
-        <a aria-hidden="" tabindex="-1" href="#availability-44"
+      <h3 id="availability-46">
+        <a aria-hidden="" tabindex="-1" href="#availability-46"
           ><svg
             aria-hidden=""
             role="img"
@@ -16626,8 +17419,8 @@
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
       </ul>
-      <h3 id="webhook-payload-object-43">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-43"
+      <h3 id="webhook-payload-object-45">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-45"
           ><svg
             aria-hidden=""
             role="img"
@@ -16702,8 +17495,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-42">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-42"
+      <h3 id="webhook-payload-example-44">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-44"
           ><svg
             aria-hidden=""
             role="img"
@@ -16887,8 +17680,8 @@
           >About Dependabot alerts</a
         >."
       </p>
-      <h3 id="availability-45">
-        <a aria-hidden="" tabindex="-1" href="#availability-45"
+      <h3 id="availability-47">
+        <a aria-hidden="" tabindex="-1" href="#availability-47"
           ><svg
             aria-hidden=""
             role="img"
@@ -16909,10 +17702,10 @@
         >Availability
       </h3>
       <ul>
-        <li>GitHub Apps with the <code>security_events</code> permission</li>
+        <li>GitHub Apps</li>
       </ul>
-      <h3 id="webhook-payload-object-44">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-44"
+      <h3 id="webhook-payload-object-46">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-46"
           ><svg
             aria-hidden=""
             role="img"
@@ -16962,8 +17755,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-43">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-43"
+      <h3 id="webhook-payload-example-45">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-45"
           ><svg
             aria-hidden=""
             role="img"
@@ -17073,8 +17866,8 @@
           >Configuring webhooks for events in your sponsored account</a
         >".
       </p>
-      <h3 id="availability-46">
-        <a aria-hidden="" tabindex="-1" href="#availability-46"
+      <h3 id="availability-48">
+        <a aria-hidden="" tabindex="-1" href="#availability-48"
           ><svg
             aria-hidden=""
             role="img"
@@ -17097,8 +17890,8 @@
       <ul>
         <li>Sponsored accounts</li>
       </ul>
-      <h3 id="webhook-payload-object-45">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-45"
+      <h3 id="webhook-payload-object-47">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-47"
           ><svg
             aria-hidden=""
             role="img"
@@ -17429,8 +18222,8 @@
           >starring</a
         >" REST API.
       </p>
-      <h3 id="availability-47">
-        <a aria-hidden="" tabindex="-1" href="#availability-47"
+      <h3 id="availability-49">
+        <a aria-hidden="" tabindex="-1" href="#availability-49"
           ><svg
             aria-hidden=""
             role="img"
@@ -17454,8 +18247,8 @@
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
       </ul>
-      <h3 id="webhook-payload-object-46">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-46"
+      <h3 id="webhook-payload-object-48">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-48"
           ><svg
             aria-hidden=""
             role="img"
@@ -17534,8 +18327,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-44">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-44"
+      <h3 id="webhook-payload-example-46">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-46"
           ><svg
             aria-hidden=""
             role="img"
@@ -17702,8 +18495,8 @@
         "<a href="/en/rest/reference/commits#commit-statuses">statuses</a>" REST
         API.
       </p>
-      <h3 id="availability-48">
-        <a aria-hidden="" tabindex="-1" href="#availability-48"
+      <h3 id="availability-50">
+        <a aria-hidden="" tabindex="-1" href="#availability-50"
           ><svg
             aria-hidden=""
             role="img"
@@ -17726,10 +18519,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>statuses</code> permission</li>
+        <li>GitHub Apps with <strong>Commit statuses</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-47">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-47"
+      <h3 id="webhook-payload-object-49">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-49"
           ><svg
             aria-hidden=""
             role="img"
@@ -17838,8 +18631,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-45">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-45"
+      <h3 id="webhook-payload-example-47">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-47"
           ><svg
             aria-hidden=""
             role="img"
@@ -18113,8 +18906,8 @@
         more information, see the "<a href="/en/rest/reference/teams">teams</a>"
         REST API.
       </p>
-      <h3 id="availability-49">
-        <a aria-hidden="" tabindex="-1" href="#availability-49"
+      <h3 id="availability-51">
+        <a aria-hidden="" tabindex="-1" href="#availability-51"
           ><svg
             aria-hidden=""
             role="img"
@@ -18136,10 +18929,10 @@
       </h3>
       <ul>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>members</code> permission</li>
+        <li>GitHub Apps with <strong>Members</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-48">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-48"
+      <h3 id="webhook-payload-object-50">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-50"
           ><svg
             aria-hidden=""
             role="img"
@@ -18273,8 +19066,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-46">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-46"
+      <h3 id="webhook-payload-example-48">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-48"
           ><svg
             aria-hidden=""
             role="img"
@@ -18474,8 +19267,8 @@
           >repository is added to a team</a
         >.
       </p>
-      <h3 id="availability-50">
-        <a aria-hidden="" tabindex="-1" href="#availability-50"
+      <h3 id="availability-52">
+        <a aria-hidden="" tabindex="-1" href="#availability-52"
           ><svg
             aria-hidden=""
             role="img"
@@ -18498,10 +19291,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>members</code> permission</li>
+        <li>GitHub Apps with <strong>Members</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-49">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-49"
+      <h3 id="webhook-payload-object-51">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-51"
           ><svg
             aria-hidden=""
             role="img"
@@ -18580,8 +19373,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-47">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-47"
+      <h3 id="webhook-payload-example-49">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-49"
           ><svg
             aria-hidden=""
             role="img"
@@ -18780,8 +19573,8 @@
         starred a repository, and the event’s repository is the
         <a href="/en/rest/reference/repos">repository</a> that was starred.
       </p>
-      <h3 id="availability-51">
-        <a aria-hidden="" tabindex="-1" href="#availability-51"
+      <h3 id="availability-53">
+        <a aria-hidden="" tabindex="-1" href="#availability-53"
           ><svg
             aria-hidden=""
             role="img"
@@ -18804,10 +19597,10 @@
       <ul>
         <li>Repository webhooks</li>
         <li>Organization webhooks</li>
-        <li>GitHub Apps with the <code>metadata</code> permission</li>
+        <li>GitHub Apps with <strong>Metadata</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-50">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-50"
+      <h3 id="webhook-payload-object-52">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-52"
           ><svg
             aria-hidden=""
             role="img"
@@ -18885,8 +19678,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-48">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-48"
+      <h3 id="webhook-payload-example-50">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-50"
           ><svg
             aria-hidden=""
             role="img"
@@ -19057,8 +19850,8 @@
           >Events that trigger workflows</a
         >."
       </p>
-      <h3 id="availability-52">
-        <a aria-hidden="" tabindex="-1" href="#availability-52"
+      <h3 id="availability-54">
+        <a aria-hidden="" tabindex="-1" href="#availability-54"
           ><svg
             aria-hidden=""
             role="img"
@@ -19079,13 +19872,10 @@
         >Availability
       </h3>
       <ul>
-        <li>
-          GitHub Apps must have the <code>contents</code> permission to receive
-          this webhook.
-        </li>
+        <li>GitHub Apps with <strong>Contents</strong> permission</li>
       </ul>
-      <h3 id="webhook-payload-object-51">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-51"
+      <h3 id="webhook-payload-object-53">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-53"
           ><svg
             aria-hidden=""
             role="img"
@@ -19120,7 +19910,7 @@
             <td><code>object</code></td>
             <td>
               Inputs to the workflow. Each key represents the name of the input
-              while it's value represents the value of that input.
+              while its value represents the value of that input.
             </td>
           </tr>
           <tr>
@@ -19139,7 +19929,7 @@
           <tr>
             <td><code>ref</code></td>
             <td><code>string</code></td>
-            <td>The branch ref from which the workflow was run.</td>
+            <td>The branch or tag from which the workflow was run.</td>
           </tr>
           <tr>
             <td><code>repository</code></td>
@@ -19166,8 +19956,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-49">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-49"
+      <h3 id="webhook-payload-example-51">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-51"
           ><svg
             aria-hidden=""
             role="img"
@@ -19355,8 +20145,8 @@
         been completed on a repository. The type of activity is specified in the
         <code>action</code> property of the payload object.
       </p>
-      <h3 id="availability-53">
-        <a aria-hidden="" tabindex="-1" href="#availability-53"
+      <h3 id="availability-55">
+        <a aria-hidden="" tabindex="-1" href="#availability-55"
           ><svg
             aria-hidden=""
             role="img"
@@ -19381,8 +20171,8 @@
         <li>Organization webhooks</li>
         <li>Enterprise webhooks</li>
       </ul>
-      <h3 id="webhook-payload-object-52">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-52"
+      <h3 id="webhook-payload-object-54">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-54"
           ><svg
             aria-hidden=""
             role="img"
@@ -19527,8 +20317,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-50">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-50"
+      <h3 id="webhook-payload-example-52">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-52"
           ><svg
             aria-hidden=""
             role="img"
@@ -19744,8 +20534,8 @@
           >Events that trigger workflows</a
         >."
       </p>
-      <h3 id="availability-54">
-        <a aria-hidden="" tabindex="-1" href="#availability-54"
+      <h3 id="availability-56">
+        <a aria-hidden="" tabindex="-1" href="#availability-56"
           ><svg
             aria-hidden=""
             role="img"
@@ -19767,12 +20557,12 @@
       </h3>
       <ul>
         <li>
-          GitHub Apps with the <code>actions</code> or
-          <code>contents</code> permissions.
+          GitHub Apps with <strong>Actions</strong> or
+          <strong>Contents</strong> permissions
         </li>
       </ul>
-      <h3 id="webhook-payload-object-53">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-53"
+      <h3 id="webhook-payload-object-55">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-object-55"
           ><svg
             aria-hidden=""
             role="img"
@@ -19807,7 +20597,8 @@
             <td><code>string</code></td>
             <td>
               The action that was performed. Can be one of
-              <code>requested</code> or <code>completed</code>.
+              <code>requested</code>, <code>in_progress</code>, or
+              <code>completed</code>.
             </td>
           </tr>
           <tr>
@@ -19856,8 +20647,8 @@
           </tr>
         </tbody>
       </table>
-      <h3 id="webhook-payload-example-51">
-        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-51"
+      <h3 id="webhook-payload-example-53">
+        <a aria-hidden="" tabindex="-1" href="#webhook-payload-example-53"
           ><svg
             aria-hidden=""
             role="img"

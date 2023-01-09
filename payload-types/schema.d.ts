@@ -13,6 +13,7 @@ export type Schema =
   | CommitCommentEvent
   | CreateEvent
   | DeleteEvent
+  | DependabotAlertEvent
   | DeployKeyEvent
   | DeploymentEvent
   | DeploymentStatusEvent
@@ -29,6 +30,7 @@ export type Schema =
   | MarketplacePurchaseEvent
   | MemberEvent
   | MembershipEvent
+  | MergeGroupEvent
   | MetaEvent
   | MilestoneEvent
   | OrgBlockEvent
@@ -46,6 +48,7 @@ export type Schema =
   | PullRequestReviewCommentEvent
   | PullRequestReviewThreadEvent
   | PushEvent
+  | RegistryPackageEvent
   | ReleaseEvent
   | RepositoryEvent
   | RepositoryDispatchEvent
@@ -66,6 +69,13 @@ export type BranchProtectionRuleEvent =
   | BranchProtectionRuleCreatedEvent
   | BranchProtectionRuleDeletedEvent
   | BranchProtectionRuleEditedEvent;
+export type BranchProtectionRuleEnforcementLevel =
+  | "off"
+  | "non_admins"
+  | "everyone";
+export type BranchProtectionRuleNumber = number;
+export type BranchProtectionRuleBoolean = boolean;
+export type BranchProtectionRuleArray = string[];
 export type CheckRunEvent =
   | CheckRunCompletedEvent
   | CheckRunCreatedEvent
@@ -95,6 +105,12 @@ export type AuthorAssociation =
   | "MEMBER"
   | "NONE"
   | "OWNER";
+export type DependabotAlertEvent =
+  | DependabotAlertCreatedEvent
+  | DependabotAlertDismissedEvent
+  | DependabotAlertFixedEvent
+  | DependabotAlertReintroducedEvent
+  | DependabotAlertReopenedEvent;
 export type DeployKeyEvent = DeployKeyCreatedEvent | DeployKeyDeletedEvent;
 export type DeploymentEvent = DeploymentCreatedEvent;
 export type DeploymentStatusEvent = DeploymentStatusCreatedEvent;
@@ -162,6 +178,7 @@ export type MemberEvent =
   | MemberEditedEvent
   | MemberRemovedEvent;
 export type MembershipEvent = MembershipAddedEvent | MembershipRemovedEvent;
+export type MergeGroupEvent = MergeGroupChecksRequestedEvent;
 export type MetaEvent = MetaDeletedEvent;
 export type WebhookEvents =
   | (
@@ -262,10 +279,12 @@ export type PullRequestEvent =
   | PullRequestAutoMergeEnabledEvent
   | PullRequestClosedEvent
   | PullRequestConvertedToDraftEvent
+  | PullRequestDequeuedEvent
   | PullRequestEditedEvent
   | PullRequestLabeledEvent
   | PullRequestLockedEvent
   | PullRequestOpenedEvent
+  | PullRequestQueuedEvent
   | PullRequestReadyForReviewEvent
   | PullRequestReopenedEvent
   | PullRequestReviewRequestRemovedEvent
@@ -339,6 +358,9 @@ export type PullRequestReviewCommentEvent =
 export type PullRequestReviewThreadEvent =
   | PullRequestReviewThreadResolvedEvent
   | PullRequestReviewThreadUnresolvedEvent;
+export type RegistryPackageEvent =
+  | RegistryPackagePublishedEvent
+  | RegistryPackageUpdatedEvent;
 export type ReleaseEvent =
   | ReleaseCreatedEvent
   | ReleaseDeletedEvent
@@ -393,6 +415,7 @@ export type WorkflowJobEvent =
 export type WorkflowStep = WorkflowStepInProgress | WorkflowStepCompleted;
 export type WorkflowRunEvent =
   | WorkflowRunCompletedEvent
+  | WorkflowRunInProgressEvent
   | WorkflowRunRequestedEvent;
 
 /**
@@ -415,29 +438,26 @@ export interface BranchProtectionRule {
   name: string;
   created_at: string;
   updated_at: string;
-  pull_request_reviews_enforcement_level: "off" | "non_admins" | "everyone";
-  required_approving_review_count: number;
-  dismiss_stale_reviews_on_push: boolean;
-  require_code_owner_review: boolean;
-  authorized_dismissal_actors_only: boolean;
-  ignore_approvals_from_contributors: boolean;
-  required_status_checks: string[];
-  required_status_checks_enforcement_level: "off" | "non_admins" | "everyone";
-  strict_required_status_checks_policy: boolean;
-  signature_requirement_enforcement_level: "off" | "non_admins" | "everyone";
-  linear_history_requirement_enforcement_level:
-    | "off"
-    | "non_admins"
-    | "everyone";
-  admin_enforced: boolean;
-  create_protected?: boolean;
-  allow_force_pushes_enforcement_level: "off" | "non_admins" | "everyone";
-  allow_deletions_enforcement_level: "off" | "non_admins" | "everyone";
-  merge_queue_enforcement_level: "off" | "non_admins" | "everyone";
-  required_deployments_enforcement_level: "off" | "non_admins" | "everyone";
-  required_conversation_resolution_level: "off" | "non_admins" | "everyone";
-  authorized_actors_only: boolean;
-  authorized_actor_names: string[];
+  pull_request_reviews_enforcement_level: BranchProtectionRuleEnforcementLevel;
+  required_approving_review_count: BranchProtectionRuleNumber;
+  dismiss_stale_reviews_on_push: BranchProtectionRuleBoolean;
+  require_code_owner_review: BranchProtectionRuleBoolean;
+  authorized_dismissal_actors_only: BranchProtectionRuleBoolean;
+  ignore_approvals_from_contributors: BranchProtectionRuleBoolean;
+  required_status_checks: BranchProtectionRuleArray;
+  required_status_checks_enforcement_level: BranchProtectionRuleEnforcementLevel;
+  strict_required_status_checks_policy: BranchProtectionRuleBoolean;
+  signature_requirement_enforcement_level: BranchProtectionRuleEnforcementLevel;
+  linear_history_requirement_enforcement_level: BranchProtectionRuleEnforcementLevel;
+  admin_enforced: BranchProtectionRuleBoolean;
+  create_protected?: BranchProtectionRuleBoolean;
+  allow_force_pushes_enforcement_level: BranchProtectionRuleEnforcementLevel;
+  allow_deletions_enforcement_level: BranchProtectionRuleEnforcementLevel;
+  merge_queue_enforcement_level: BranchProtectionRuleEnforcementLevel;
+  required_deployments_enforcement_level: BranchProtectionRuleEnforcementLevel;
+  required_conversation_resolution_level: BranchProtectionRuleEnforcementLevel;
+  authorized_actors_only: BranchProtectionRuleBoolean;
+  authorized_actor_names: BranchProtectionRuleArray;
 }
 /**
  * A git repository
@@ -653,6 +673,10 @@ export interface Repository {
    */
   has_wiki: boolean;
   has_pages: boolean;
+  /**
+   * Whether discussions are enabled.
+   */
+  has_discussions?: boolean;
   forks_count: number;
   mirror_url: string | null;
   /**
@@ -695,6 +719,10 @@ export interface Repository {
   allow_forking?: boolean;
   allow_update_branch?: boolean;
   use_squash_pr_title_as_default?: boolean;
+  squash_merge_commit_message?: string;
+  squash_merge_commit_title?: string;
+  merge_commit_message?: string;
+  merge_commit_title?: string;
   is_template: boolean;
   web_commit_signoff_required: boolean;
   topics: string[];
@@ -788,15 +816,54 @@ export interface BranchProtectionRuleEditedEvent {
   /**
    * If the action was `edited`, the changes to the rule.
    */
-  changes: {
+  changes?: {
+    admin_enforced?: {
+      from: BranchProtectionRuleBoolean;
+    };
+    allow_deletions_enforcement_level?: {
+      from: BranchProtectionRuleEnforcementLevel | null;
+    };
+    allow_force_pushes_enforcement_level?: {
+      from: BranchProtectionRuleEnforcementLevel;
+    };
     authorized_actors_only?: {
-      from: boolean;
+      from: BranchProtectionRuleBoolean;
     };
     authorized_actor_names?: {
-      from: string[];
+      from: BranchProtectionRuleArray;
+    };
+    authorized_dismissal_actors_only?: {
+      from: BranchProtectionRuleBoolean | null;
+    };
+    dismiss_stale_reviews_on_push?: {
+      from: BranchProtectionRuleBoolean;
+    };
+    pull_request_reviews_enforcement_level?: {
+      from: BranchProtectionRuleEnforcementLevel;
+    };
+    require_code_owner_review?: {
+      from: BranchProtectionRuleBoolean;
+    };
+    required_approving_review_count?: {
+      from: BranchProtectionRuleNumber;
+    };
+    required_conversation_resolution_level?: {
+      from: BranchProtectionRuleEnforcementLevel;
+    };
+    required_deployments_enforcement_level?: {
+      from: BranchProtectionRuleEnforcementLevel;
     };
     required_status_checks?: {
-      from: string[];
+      from: BranchProtectionRuleArray;
+    };
+    required_status_checks_enforcement_level?: {
+      from: BranchProtectionRuleEnforcementLevel;
+    };
+    signature_requirement_enforcement_level?: {
+      from: BranchProtectionRuleEnforcementLevel;
+    };
+    linear_history_requirement_enforcement_level?: {
+      from: BranchProtectionRuleEnforcementLevel;
     };
   };
   repository: Repository;
@@ -980,6 +1047,7 @@ export interface App {
   permissions?: {
     actions?: "read" | "write";
     administration?: "read" | "write";
+    blocking?: "read" | "write";
     checks?: "read" | "write";
     content_references?: "read" | "write";
     contents?: "read" | "write";
@@ -987,6 +1055,7 @@ export interface App {
     discussions?: "read" | "write";
     emails?: "read" | "write";
     environments?: "read" | "write";
+    followers?: "read" | "write";
     issues?: "read" | "write";
     keys?: "read" | "write";
     members?: "read" | "write";
@@ -1421,7 +1490,7 @@ export interface CheckSuiteCompletedEvent {
      */
     head_sha: string;
     /**
-     * The summary status for all check runs that are part of the check suite. Can be `requested`, `in_progress`, or `completed`.
+     * The summary status for all check runs that are part of the check suite. Can be `queued`, `requested`, `in_progress`, or `completed`.
      */
     status: "requested" | "in_progress" | "completed" | "queued" | null;
     /**
@@ -1500,7 +1569,7 @@ export interface CheckSuiteRequestedEvent {
      */
     head_sha: string;
     /**
-     * The summary status for all check runs that are part of the check suite. Can be `requested`, `in_progress`, or `completed`.
+     * The summary status for all check runs that are part of the check suite. Can be `queued`, `requested`, `in_progress`, or `completed`.
      */
     status: "requested" | "in_progress" | "completed" | "queued" | null;
     /**
@@ -1556,7 +1625,7 @@ export interface CheckSuiteRerequestedEvent {
      */
     head_sha: string;
     /**
-     * The summary status for all check runs that are part of the check suite. Can be `requested`, `in_progress`, or `completed`.
+     * The summary status for all check runs that are part of the check suite. Can be `queued`, `requested`, `in_progress`, or `completed`.
      */
     status: "requested" | "in_progress" | "completed" | "queued" | null;
     /**
@@ -2228,6 +2297,281 @@ export interface DeleteEvent {
   installation?: InstallationLite;
   organization?: Organization;
 }
+export interface DependabotAlertCreatedEvent {
+  action: "created";
+  alert: DependabotAlert & {
+    state: "open";
+    fixed_at: null;
+    dismissed_at: null;
+    dismissed_by: null;
+    dismissed_reason: null;
+    dismissed_comment: null;
+  };
+  repository: Repository;
+  sender: GitHubOrg;
+  installation?: InstallationLite;
+  organization?: Organization;
+}
+/**
+ * A Dependabot alert.
+ */
+export interface DependabotAlert {
+  /**
+   * The security alert number.
+   */
+  number: number;
+  /**
+   * The state of the Dependabot alert.
+   */
+  state: "dismissed" | "fixed" | "open";
+  /**
+   * Details for the vulnerable dependency.
+   */
+  dependency: {
+    package: DependabotAlertPackage;
+    /**
+     * The full path to the dependency manifest file, relative to the root of the repository.
+     */
+    manifest_path: string;
+    /**
+     * The execution scope of the vulnerable dependency.
+     */
+    scope: "development" | "runtime" | null;
+  };
+  /**
+   * Details for the GitHub Security Advisory.
+   */
+  security_advisory: {
+    /**
+     * Details for the GitHub Security Advisory.
+     */
+    ghsa_id: string;
+    /**
+     * The unique CVE ID assigned to the advisory.
+     */
+    cve_id: string | null;
+    /**
+     * A short, plain text summary of the advisory.
+     */
+    summary: string;
+    /**
+     * A long-form Markdown-supported description of the advisory.
+     */
+    description: string;
+    /**
+     * Vulnerable version range information for the advisory.
+     */
+    vulnerabilities: {
+      package: DependabotAlertPackage;
+      /**
+       * The severity of the vulnerability.
+       */
+      severity: "low" | "medium" | "high" | "critical";
+      /**
+       * Conditions that identify vulnerable versions of this vulnerability's package.
+       */
+      vulnerable_version_range: string;
+      /**
+       * Details pertaining to the package version that patches this vulnerability.
+       */
+      first_patched_version: {
+        /**
+         * The package version that patches this vulnerability.
+         */
+        identifier: string;
+      };
+    }[];
+    /**
+     * The severity of the advisory.
+     */
+    severity: "low" | "medium" | "high" | "critical";
+    cvss: SecurityAdvisoryCvss;
+    /**
+     * Details for the advisory pertaining to Common Weakness Enumeration.
+     */
+    cwes: SecurityAdvisoryCwes[];
+    /**
+     * Values that identify this advisory among security information sources.
+     */
+    identifiers: {
+      /**
+       * The type of advisory identifier.
+       */
+      type: "CVE" | "GHSA";
+      /**
+       * The value of the advisory identifer.
+       */
+      value: string;
+    }[];
+    /**
+     * Links to additional advisory information.
+     */
+    references: {
+      /**
+       * The URL of the reference.
+       */
+      url: string;
+    }[];
+    /**
+     * The time that the advisory was published in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+     */
+    published_at: string;
+    /**
+     * The time that the advisory was last modified in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+     */
+    updated_at: string;
+    /**
+     * The time that the advisory was withdrawn in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+     */
+    withdrawn_at: string | null;
+  };
+  /**
+   * Details pertaining to one vulnerable version range for the advisory.
+   */
+  security_vulnerability: {
+    package: DependabotAlertPackage;
+    /**
+     * The severity of the vulnerability.
+     */
+    severity: "low" | "medium" | "high" | "critical";
+    /**
+     * Conditions that identify vulnerable versions of this vulnerability's package.
+     */
+    vulnerable_version_range: string;
+    /**
+     * Details pertaining to the package version that patches this vulnerability.
+     */
+    first_patched_version: {
+      /**
+       * The package version that patches this vulnerability.
+       */
+      identifier: string;
+    };
+  };
+  /**
+   * The REST API URL of the alert resource.
+   */
+  url: string;
+  /**
+   * The GitHub URL of the alert resource.
+   */
+  html_url: string;
+  /**
+   * The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+   */
+  created_at: string;
+  /**
+   * The time that the alert was last updated in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+   */
+  updated_at: string;
+  /**
+   * The time that the alert was dismissed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+   */
+  dismissed_at: string | null;
+  dismissed_by: User | null;
+  /**
+   * The reason that the alert was dismissed.
+   */
+  dismissed_reason:
+    | "fix_started"
+    | "inaccurate"
+    | "no_bandwidth"
+    | "not_used"
+    | "tolerable_risk"
+    | null;
+  /**
+   * An optional comment associated with the alert's dismissal.
+   */
+  dismissed_comment: string | null;
+  /**
+   * The time that the alert was no longer detected and was considered fixed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+   */
+  fixed_at: string | null;
+}
+/**
+ * Details for the vulnerable package.
+ */
+export interface DependabotAlertPackage {
+  /**
+   * The unique package name within its ecosystem.
+   */
+  name: string;
+  /**
+   * The package's language or package management ecosystem.
+   */
+  ecosystem: string;
+}
+/**
+ * Details for the advisory pertaining to the Common Vulnerability Scoring System.
+ */
+export interface SecurityAdvisoryCvss {
+  /**
+   * The overall CVSS score of the advisory.
+   */
+  score: number;
+  /**
+   * The full CVSS vector string for the advisory.
+   */
+  vector_string: string | null;
+}
+/**
+ * A CWE weakness assigned to the advisory.
+ */
+export interface SecurityAdvisoryCwes {
+  /**
+   * The unique CWE ID.
+   */
+  cwe_id: string;
+  /**
+   * The short, plain text name of the CWE.
+   */
+  name: string;
+}
+export interface DependabotAlertDismissedEvent {
+  action: "dismissed";
+  alert: DependabotAlert & {
+    state: "dismissed";
+    dismissed_at: string;
+    dismissed_by: User;
+    dismissed_reason:
+      | "fix_started"
+      | "inaccurate"
+      | "no_bandwidth"
+      | "not_used"
+      | "tolerable_risk";
+  };
+  repository: Repository;
+  sender: User;
+  installation?: InstallationLite;
+  organization?: Organization;
+}
+export interface DependabotAlertFixedEvent {
+  action: "fixed";
+  alert: DependabotAlert & {
+    state: "fixed";
+    fixed_at: string;
+  };
+  repository: Repository;
+  sender: GitHubOrg;
+  installation?: InstallationLite;
+  organization?: Organization;
+}
+export interface DependabotAlertReintroducedEvent {
+  action: "reintroduced";
+  alert: DependabotAlert;
+  repository: Repository;
+  sender: GitHubOrg;
+  installation?: InstallationLite;
+  organization?: Organization;
+}
+export interface DependabotAlertReopenedEvent {
+  action: "reopened";
+  alert: DependabotAlert;
+  repository: Repository;
+  sender: User;
+  installation?: InstallationLite;
+  organization?: Organization;
+}
 export interface DeployKeyCreatedEvent {
   action: "created";
   /**
@@ -2335,6 +2679,7 @@ export interface DeploymentWorkflowRun {
   id: number;
   name: string;
   path?: string;
+  display_title?: string;
   node_id: string;
   head_branch: string;
   head_sha: string;
@@ -2898,6 +3243,7 @@ export interface Installation {
      * The level of permission granted to the access token for repository creation, deletion, settings, teams, and collaborators creation.
      */
     administration?: "read" | "write";
+    blocking?: "read" | "write";
     /**
      * The level of permission granted to the access token for checks on code.
      */
@@ -2925,6 +3271,7 @@ export interface Installation {
      * The level of permission granted to the access token for organization teams and members.
      */
     members?: "read" | "write";
+    merge_queues?: "read" | "write";
     /**
      * The level of permission granted to the access token to search repositories, list collaborators, and access repository metadata.
      */
@@ -3984,6 +4331,51 @@ export interface MembershipRemovedEvent {
   organization: Organization;
   installation?: InstallationLite;
 }
+export interface MergeGroupChecksRequestedEvent {
+  action: "checks_requested";
+  /**
+   * The merge group.
+   */
+  merge_group: {
+    /**
+     * The SHA of the merge group.
+     */
+    head_sha: string;
+    /**
+     * The full ref of the merge group.
+     */
+    head_ref: string;
+    /**
+     * The full ref of the branch the merge group will be merged into.
+     */
+    base_ref: string;
+    /**
+     * The SHA of the merge group's parent commit.
+     */
+    base_sha: string;
+    /**
+     * An expanded representation of the `head_sha` commit.
+     */
+    head_commit: {
+      id: string;
+      tree_id: string;
+      message: string;
+      timestamp: string;
+      author: {
+        name: string;
+        email: string;
+      };
+      committer: {
+        name: string;
+        email: string;
+      };
+    };
+  };
+  repository: Repository;
+  sender: User;
+  installation?: InstallationLite;
+  organization?: Organization;
+}
 export interface MetaDeletedEvent {
   action: "deleted";
   /**
@@ -4173,8 +4565,12 @@ export interface OrganizationMemberRemovedEvent {
   organization: Organization;
 }
 export interface OrganizationRenamedEvent {
+  changes: {
+    login: {
+      from: string;
+    };
+  };
   action: "renamed";
-  membership: Membership;
   sender: User;
   installation?: InstallationLite;
   organization: Organization;
@@ -4205,7 +4601,7 @@ export interface PackagePublishedEvent {
       | "rubygems"
       | "docker"
       | "nuget"
-      | "container";
+      | "CONTAINER";
     html_url: string;
     created_at: string;
     updated_at: string;
@@ -4225,9 +4621,26 @@ export interface PackagePublishedEvent {
        */
       name: string;
       description: string;
-      body: string;
-      body_html: string;
-      release: {
+      body?:
+        | string
+        | {
+            repository: {
+              repository: Repository;
+            };
+            info: {
+              type: string;
+              oid: string;
+              mode: number;
+              name: string;
+              path: string;
+              size: number | null;
+              collection: boolean;
+            };
+            attributes: {};
+            _formatted: boolean;
+          };
+      body_html?: string;
+      release?: {
         url: string;
         html_url: string;
         id: number;
@@ -4240,20 +4653,35 @@ export interface PackagePublishedEvent {
         created_at: string;
         published_at: string;
       };
-      manifest: string;
+      manifest?: string;
       html_url: string;
-      tag_name: string;
-      target_commitish: string;
-      target_oid: string;
-      draft: boolean;
-      prerelease: boolean;
-      created_at: string;
-      updated_at: string;
+      tag_name?: string;
+      target_commitish?: string;
+      target_oid?: string;
+      draft?: boolean;
+      prerelease?: boolean;
+      created_at?: string;
+      updated_at?: string;
       /**
        * Package Version Metadata
        */
       metadata: unknown[];
-      docker_metadata: unknown[];
+      container_metadata?: {
+        labels?: {
+          [k: string]: unknown;
+        } | null;
+        manifest?: {
+          [k: string]: unknown;
+        } | null;
+        tag?: {
+          digest?: string;
+          name?: string;
+        };
+      } | null;
+      docker_metadata?: unknown[];
+      npm_metadata?: PackageNPMMetadata | null;
+      nuget_metadata?: PackageNugetMetadata[] | null;
+      rubygems_metadata?: unknown[];
       package_files: {
         download_url: string;
         id: number;
@@ -4267,10 +4695,11 @@ export interface PackagePublishedEvent {
         created_at: string;
         updated_at: string;
       }[];
-      author: User;
-      source_url: string;
+      package_url?: string;
+      author?: User;
+      source_url?: string;
       installation_command: string;
-    };
+    } | null;
     registry: {
       about_url: string;
       name: string;
@@ -4282,6 +4711,94 @@ export interface PackagePublishedEvent {
   repository: Repository;
   sender: User;
   organization?: Organization;
+}
+export interface PackageNPMMetadata {
+  name?: string;
+  version?: string;
+  npm_user?: string;
+  author?: {
+    [k: string]: string;
+  } | null;
+  bugs?: {
+    [k: string]: string;
+  } | null;
+  dependencies?: {
+    [k: string]: string;
+  };
+  dev_dependencies?: {
+    [k: string]: string;
+  };
+  peer_dependencies?: {
+    [k: string]: string;
+  };
+  optional_dependencies?: {
+    [k: string]: string;
+  };
+  description?: string;
+  dist?: {
+    [k: string]: string;
+  } | null;
+  git_head?: string;
+  homepage?: string;
+  license?: string;
+  main?: string;
+  repository?: {
+    [k: string]: string;
+  } | null;
+  scripts?: {
+    [k: string]: unknown;
+  };
+  id?: string;
+  node_version?: string;
+  npm_version?: string;
+  has_shrinkwrap?: boolean;
+  maintainers?: {
+    [k: string]: unknown;
+  }[];
+  contributors?: {
+    [k: string]: unknown;
+  }[];
+  engines?: {
+    [k: string]: string;
+  };
+  keywords?: string[];
+  files?: string[];
+  bin?: {
+    [k: string]: unknown;
+  };
+  man?: {
+    [k: string]: unknown;
+  };
+  directories?: {
+    [k: string]: string;
+  } | null;
+  os?: string[];
+  cpu?: string[];
+  readme?: string;
+  installation_command?: string;
+  release_id?: number;
+  commit_oid?: string;
+  published_via_actions?: boolean;
+  deleted_by_id?: number;
+}
+export interface PackageNugetMetadata {
+  id?:
+    | string
+    | {
+        [k: string]: unknown;
+      }
+    | number;
+  name?: string;
+  value?:
+    | boolean
+    | string
+    | number
+    | {
+        url?: string;
+        branch?: string;
+        commit?: string;
+        type?: string;
+      };
 }
 export interface PackageUpdatedEvent {
   action: "updated";
@@ -4306,7 +4823,7 @@ export interface PackageUpdatedEvent {
       | "rubygems"
       | "docker"
       | "nuget"
-      | "container";
+      | "CONTAINER";
     html_url: string;
     created_at: string;
     updated_at: string;
@@ -4326,9 +4843,26 @@ export interface PackageUpdatedEvent {
        */
       name: string;
       description: string;
-      body: string;
-      body_html: string;
-      release: {
+      body?:
+        | string
+        | {
+            repository: {
+              repository: Repository;
+            };
+            info: {
+              type: string;
+              oid: string;
+              mode: number;
+              name: string;
+              path: string;
+              size: number | null;
+              collection: boolean;
+            };
+            attributes: {};
+            _formatted: boolean;
+          };
+      body_html?: string;
+      release?: {
         url: string;
         html_url: string;
         id: number;
@@ -4341,20 +4875,35 @@ export interface PackageUpdatedEvent {
         created_at: string;
         published_at: string;
       };
-      manifest: string;
+      manifest?: string;
       html_url: string;
-      tag_name: string;
-      target_commitish: string;
-      target_oid: string;
-      draft: boolean;
-      prerelease: boolean;
-      created_at: string;
-      updated_at: string;
+      tag_name?: string;
+      target_commitish?: string;
+      target_oid?: string;
+      draft?: boolean;
+      prerelease?: boolean;
+      created_at?: string;
+      updated_at?: string;
       /**
        * Package Version Metadata
        */
       metadata: unknown[];
-      docker_metadata: unknown[];
+      container_metadata?: {
+        labels?: {
+          [k: string]: unknown;
+        } | null;
+        manifest?: {
+          [k: string]: unknown;
+        } | null;
+        tag?: {
+          digest?: string;
+          name?: string;
+        };
+      } | null;
+      docker_metadata?: unknown[];
+      npm_metadata?: PackageNPMMetadata | null;
+      nuget_metadata?: PackageNugetMetadata[] | null;
+      rubygems_metadata?: unknown[];
       package_files: {
         download_url: string;
         id: number;
@@ -4368,10 +4917,11 @@ export interface PackageUpdatedEvent {
         created_at: string;
         updated_at: string;
       }[];
-      author: User;
-      source_url: string;
+      package_url?: string;
+      author?: User;
+      source_url?: string;
       installation_command: string;
-    };
+    } | null;
     registry: {
       about_url: string;
       name: string;
@@ -4693,7 +5243,7 @@ export interface ProjectsV2ItemArchivedEvent {
   installation?: InstallationLite;
 }
 /**
- * The project item itself. To find more information about the project item, you can use `node_id` (the node ID of the project item) and `project_node_id` (the node ID of the project) to query information in the GraphQL API. For more information, see "[Using the API to manage projects (beta)](https://docs.github.com/en/issues/trying-out-the-new-projects-experience/using-the-api-to-manage-projects)."
+ * The project item itself. To find more information about the project item, you can use `node_id` (the node ID of the project item) and `project_node_id` (the node ID of the project) to query information in the GraphQL API. For more information, see "[Using the API to manage projects](https://docs.github.com/en/issues/trying-out-the-new-projects-experience/using-the-api-to-manage-projects)."
  */
 export interface ProjectsV2Item {
   id: number;
@@ -4969,6 +5519,22 @@ export interface PullRequestConvertedToDraftEvent {
   organization?: Organization;
   sender: User;
 }
+export interface PullRequestDequeuedEvent {
+  action: "dequeued";
+  /**
+   * The pull request number.
+   */
+  number: number;
+  /**
+   * The reason the pull request was removed from a merge queue.
+   */
+  reason: string;
+  pull_request: PullRequest;
+  repository: Repository;
+  installation?: InstallationLite;
+  organization?: Organization;
+  sender: User;
+}
 export interface PullRequestEditedEvent {
   action: "edited";
   /**
@@ -5044,6 +5610,18 @@ export interface PullRequestOpenedEvent {
     active_lock_reason: null;
     merged_by: null;
   };
+  repository: Repository;
+  installation?: InstallationLite;
+  organization?: Organization;
+  sender: User;
+}
+export interface PullRequestQueuedEvent {
+  action: "queued";
+  /**
+   * The pull request number.
+   */
+  number: number;
+  pull_request: PullRequest;
   repository: Repository;
   installation?: InstallationLite;
   organization?: Organization;
@@ -5143,39 +5721,42 @@ export interface PullRequestUnlockedEvent {
 }
 export interface PullRequestReviewDismissedEvent {
   action: "dismissed";
-  /**
-   * The review that was affected.
-   */
-  review: {
-    /**
-     * Unique identifier of the review
-     */
-    id: number;
-    node_id: string;
-    user: User;
-    /**
-     * The text of the review.
-     */
-    body: string | null;
-    /**
-     * A commit SHA for the review.
-     */
-    commit_id: string;
-    submitted_at: string;
+  review: PullRequestReview & {
     state: "dismissed";
-    html_url: string;
-    pull_request_url: string;
-    author_association: AuthorAssociation;
-    _links: {
-      html: Link;
-      pull_request: Link;
-    };
   };
   pull_request: SimplePullRequest;
   repository: Repository;
   installation?: InstallationLite;
   organization?: Organization;
   sender: User;
+}
+/**
+ * The review that was affected.
+ */
+export interface PullRequestReview {
+  /**
+   * Unique identifier of the review
+   */
+  id: number;
+  node_id: string;
+  user: User;
+  /**
+   * The text of the review.
+   */
+  body: string | null;
+  /**
+   * A commit SHA for the review.
+   */
+  commit_id: string;
+  submitted_at: string | null;
+  state: "commented" | "changes_requested" | "approved" | "dismissed";
+  html_url: string;
+  pull_request_url: string;
+  author_association: AuthorAssociation;
+  _links: {
+    html: Link;
+    pull_request: Link;
+  };
 }
 export interface SimplePullRequest {
   url: string;
@@ -5246,34 +5827,7 @@ export interface PullRequestReviewEditedEvent {
       from: string;
     };
   };
-  /**
-   * The review that was affected.
-   */
-  review: {
-    /**
-     * Unique identifier of the review
-     */
-    id: number;
-    node_id: string;
-    user: User;
-    /**
-     * The text of the review.
-     */
-    body: string | null;
-    /**
-     * A commit SHA for the review.
-     */
-    commit_id: string;
-    submitted_at: string;
-    state: string;
-    html_url: string;
-    pull_request_url: string;
-    author_association: AuthorAssociation;
-    _links: {
-      html: Link;
-      pull_request: Link;
-    };
-  };
+  review: PullRequestReview;
   pull_request: SimplePullRequest;
   repository: Repository;
   installation?: InstallationLite;
@@ -5282,34 +5836,7 @@ export interface PullRequestReviewEditedEvent {
 }
 export interface PullRequestReviewSubmittedEvent {
   action: "submitted";
-  /**
-   * The review that was affected.
-   */
-  review: {
-    /**
-     * Unique identifier of the review
-     */
-    id: number;
-    node_id: string;
-    user: User;
-    /**
-     * The text of the review.
-     */
-    body: string | null;
-    /**
-     * A commit SHA for the review.
-     */
-    commit_id: string;
-    submitted_at: string;
-    state: string;
-    html_url: string;
-    pull_request_url: string;
-    author_association: AuthorAssociation;
-    _links: {
-      html: Link;
-      pull_request: Link;
-    };
-  };
+  review: PullRequestReview;
   pull_request: SimplePullRequest;
   repository: Repository;
   installation?: InstallationLite;
@@ -5713,17 +6240,373 @@ export interface Commit {
   author: Committer;
   committer: Committer;
   /**
-   * An array of files added in the commit.
+   * An array of files added in the commit. For extremely large commits where GitHub is unable to calculate this list in a timely manner, this may be empty even if files were added.
    */
   added: string[];
   /**
-   * An array of files modified by the commit.
+   * An array of files modified by the commit. For extremely large commits where GitHub is unable to calculate this list in a timely manner, this may be empty even if files were modified.
    */
   modified: string[];
   /**
-   * An array of files removed in the commit.
+   * An array of files removed in the commit. For extremely large commits where GitHub is unable to calculate this list in a timely manner, this may be empty even if files were removed.
    */
   removed: string[];
+}
+export interface RegistryPackagePublishedEvent {
+  action: "published";
+  /**
+   * Information about the package.
+   */
+  registry_package: {
+    /**
+     * Unique identifier of the package.
+     */
+    id: number;
+    /**
+     * The name of the package.
+     */
+    name: string;
+    namespace: string;
+    description: string | null;
+    ecosystem: string;
+    /**
+     * The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     */
+    package_type:
+      | "npm"
+      | "maven"
+      | "rubygems"
+      | "docker"
+      | "nuget"
+      | "CONTAINER";
+    html_url: string;
+    created_at: string;
+    updated_at: string | null;
+    owner: User;
+    /**
+     * A version of a software package
+     */
+    package_version: {
+      /**
+       * Unique identifier of the package version.
+       */
+      id: number;
+      version: string;
+      summary: string;
+      /**
+       * The name of the package version.
+       */
+      name: string;
+      description: string;
+      body?:
+        | string
+        | {
+            repository: {
+              repository: Repository;
+            };
+            info: {
+              type: string;
+              oid: string;
+              mode: number;
+              name: string;
+              path: string;
+              size: number | null;
+              collection: boolean | null;
+            };
+            attributes?: {
+              [k: string]: unknown;
+            };
+            _formatted?: boolean;
+          };
+      body_html?: string;
+      release?: {
+        url: string;
+        html_url: string;
+        id: number;
+        tag_name: string;
+        target_commitish: string;
+        name: string;
+        draft: boolean;
+        author: User;
+        prerelease: boolean;
+        created_at: string;
+        published_at: string;
+      };
+      manifest?: string;
+      html_url: string;
+      tag_name?: string;
+      target_commitish?: string;
+      target_oid?: string;
+      draft?: boolean;
+      prerelease?: boolean;
+      created_at?: string;
+      updated_at?: string;
+      /**
+       * Package Version Metadata
+       */
+      metadata: unknown[];
+      docker_metadata?: unknown[];
+      container_metadata?: {
+        labels?: {
+          description?: string;
+          source?: string;
+          revision?: string;
+          image_url?: string;
+          licenses?: string;
+          all_labels?: {
+            [k: string]: string;
+          };
+        } | null;
+        manifest?: {
+          digest?: string;
+          media_type?: string;
+          uri?: string;
+          size?: number;
+          config?: {
+            digest?: string;
+            media_type?: string;
+            size?: number;
+          };
+          layers?: {
+            digest?: string;
+            media_type?: string;
+            size?: number;
+          }[];
+        } | null;
+        tag?: {
+          digest?: string;
+          name?: string;
+        };
+      };
+      npm_metadata?: PackageNPMMetadata | null;
+      nuget_metadata?: PackageNugetMetadata[] | null;
+      rubygems_metadata?: unknown[];
+      package_files: {
+        download_url: string;
+        id: number;
+        name: string;
+        sha256: string;
+        sha1: string;
+        md5: string;
+        content_type: string;
+        state: string;
+        size: number;
+        created_at: string;
+        updated_at: string;
+      }[];
+      package_url?: string;
+      author?: {
+        avatar_url: string;
+        events_url: string;
+        followers_url: string;
+        following_url: string;
+        gists_url: string;
+        gravatar_id: string;
+        html_url: string;
+        id: number;
+        login: string;
+        node_id: string;
+        organizations_url: string;
+        received_events_url: string;
+        repos_url: string;
+        site_admin: boolean;
+        starred_url: string;
+        subscriptions_url: string;
+        type: string;
+        url: string;
+      };
+      source_url?: string;
+      installation_command: string;
+    } | null;
+    registry: {
+      about_url: string;
+      name: string;
+      type: string;
+      url: string;
+      vendor: string;
+    };
+  };
+  repository: Repository;
+  sender: User;
+  organization?: Organization;
+}
+export interface RegistryPackageUpdatedEvent {
+  action: "updated";
+  /**
+   * Information about the package.
+   */
+  registry_package: {
+    /**
+     * Unique identifier of the package.
+     */
+    id: number;
+    /**
+     * The name of the package.
+     */
+    name: string;
+    namespace: string;
+    description: string | null;
+    ecosystem: string;
+    /**
+     * The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     */
+    package_type:
+      | "npm"
+      | "maven"
+      | "rubygems"
+      | "docker"
+      | "nuget"
+      | "CONTAINER";
+    html_url: string;
+    created_at: string;
+    updated_at: string | null;
+    owner: User;
+    /**
+     * A version of a software package
+     */
+    package_version: {
+      /**
+       * Unique identifier of the package version.
+       */
+      id: number;
+      version: string;
+      summary: string;
+      /**
+       * The name of the package version.
+       */
+      name: string;
+      description: string;
+      body?:
+        | string
+        | {
+            repository: {
+              repository: Repository;
+            };
+            info: {
+              type: string;
+              oid: string;
+              mode: number;
+              name: string;
+              path: string;
+              size: number | null;
+              collection: boolean | null;
+            };
+            attributes?: {
+              [k: string]: unknown;
+            };
+            _formatted?: boolean;
+          };
+      body_html?: string;
+      release?: {
+        url: string;
+        html_url: string;
+        id: number;
+        tag_name: string;
+        target_commitish: string;
+        name: string;
+        draft: boolean;
+        author: User;
+        prerelease: boolean;
+        created_at: string;
+        published_at: string;
+      };
+      manifest?: string;
+      html_url: string;
+      tag_name?: string;
+      target_commitish?: string;
+      target_oid?: string;
+      draft?: boolean;
+      prerelease?: boolean;
+      created_at?: string;
+      updated_at?: string;
+      /**
+       * Package Version Metadata
+       */
+      metadata: unknown[];
+      docker_metadata?: unknown[];
+      container_metadata?: {
+        labels?: {
+          description?: string;
+          source?: string;
+          revision?: string;
+          image_url?: string;
+          licenses?: string;
+          all_labels?: {
+            [k: string]: string;
+          };
+        } | null;
+        manifest?: {
+          digest?: string;
+          media_type?: string;
+          uri?: string;
+          size?: number;
+          config?: {
+            digest?: string;
+            media_type?: string;
+            size?: number;
+          };
+          layers?: {
+            digest?: string;
+            media_type?: string;
+            size?: number;
+          }[];
+        } | null;
+        tag?: {
+          digest?: string;
+          name?: string;
+        };
+      };
+      npm_metadata?: PackageNPMMetadata | null;
+      nuget_metadata?: PackageNugetMetadata[] | null;
+      rubygems_metadata?: unknown[];
+      package_files: {
+        download_url: string;
+        id: number;
+        name: string;
+        sha256: string;
+        sha1: string;
+        md5: string;
+        content_type: string;
+        state: string;
+        size: number;
+        created_at: string;
+        updated_at: string;
+      }[];
+      package_url?: string;
+      author?: {
+        avatar_url: string;
+        events_url: string;
+        followers_url: string;
+        following_url: string;
+        gists_url: string;
+        gravatar_id: string;
+        html_url: string;
+        id: number;
+        login: string;
+        node_id: string;
+        organizations_url: string;
+        received_events_url: string;
+        repos_url: string;
+        site_admin: boolean;
+        starred_url: string;
+        subscriptions_url: string;
+        type: string;
+        url: string;
+      };
+      source_url?: string;
+      installation_command: string;
+    } | null;
+    registry: {
+      about_url: string;
+      name: string;
+      type: string;
+      url: string;
+      vendor: string;
+    };
+  };
+  repository: Repository;
+  sender: User;
+  organization?: Organization;
 }
 export interface ReleaseCreatedEvent {
   action: "created";
@@ -6120,6 +7003,7 @@ export interface SecurityAdvisoryPerformedEvent {
       name: string;
     }[];
     ghsa_id: string;
+    cve_id: string | null;
     summary: string;
     description: string;
     severity: string;
@@ -6161,6 +7045,7 @@ export interface SecurityAdvisoryPublishedEvent {
       name: string;
     }[];
     ghsa_id: string;
+    cve_id: string | null;
     summary: string;
     description: string;
     severity: string;
@@ -6202,6 +7087,7 @@ export interface SecurityAdvisoryUpdatedEvent {
       name: string;
     }[];
     ghsa_id: string;
+    cve_id: string | null;
     summary: string;
     description: string;
     severity: string;
@@ -6243,6 +7129,7 @@ export interface SecurityAdvisoryWithdrawnEvent {
       name: string;
     }[];
     ghsa_id: string;
+    cve_id: string | null;
     summary: string;
     description: string;
     severity: string;
@@ -6659,6 +7546,7 @@ export interface WorkflowJob {
   runner_group_name: string | null;
   started_at: string;
   completed_at: string | null;
+  workflow_name: string;
 }
 export interface WorkflowStepInProgress {
   name: string;
@@ -6758,7 +7646,8 @@ export interface WorkflowRun {
   /**
    * The full path of the workflow
    */
-  path?: string;
+  path: string;
+  display_title: string;
   html_url: string;
   /**
    * The ID of the workflow run.
@@ -7014,6 +7903,15 @@ export interface RepositoryLite {
    */
   url: string;
 }
+export interface WorkflowRunInProgressEvent {
+  action: "in_progress";
+  organization?: Organization;
+  repository: Repository;
+  sender: User;
+  workflow: Workflow;
+  workflow_run: WorkflowRun;
+  installation?: InstallationLite;
+}
 export interface WorkflowRunRequestedEvent {
   action: "requested";
   organization?: Organization;
@@ -7032,6 +7930,7 @@ export interface EventPayloadMap {
   commit_comment: CommitCommentEvent;
   create: CreateEvent;
   delete: DeleteEvent;
+  dependabot_alert: DependabotAlertEvent;
   deploy_key: DeployKeyEvent;
   deployment: DeploymentEvent;
   deployment_status: DeploymentStatusEvent;
@@ -7048,6 +7947,7 @@ export interface EventPayloadMap {
   marketplace_purchase: MarketplacePurchaseEvent;
   member: MemberEvent;
   membership: MembershipEvent;
+  merge_group: MergeGroupEvent;
   meta: MetaEvent;
   milestone: MilestoneEvent;
   org_block: OrgBlockEvent;
@@ -7065,6 +7965,7 @@ export interface EventPayloadMap {
   pull_request_review_comment: PullRequestReviewCommentEvent;
   pull_request_review_thread: PullRequestReviewThreadEvent;
   push: PushEvent;
+  registry_package: RegistryPackageEvent;
   release: ReleaseEvent;
   repository: RepositoryEvent;
   repository_dispatch: RepositoryDispatchEvent;
